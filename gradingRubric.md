@@ -4,43 +4,30 @@
 
 ### Part one rubric here ###
 - Grading rubric turned in by 11/15 (5 points)
-- Photo and gallery management
-	-- 
-- User management
+- Photo and gallery management (25 points)
+	-- Users can add pictures to their blog for private viewing/storage, and organize them in a file server structure
+	-- Users can curate galleries for public sharing
+	-- it is intuitive to add pictures to existing galleries when first uploading the pictures
+	-- Users can make "open galleries" where other logged in users can submit content
+	--- the admin of the open gallery can approve or deny publishing 
+- User and blog management (15-20 points)
 	-- Users can sign up and log in 
+	-- When not logged in, visitors can only view galleries, not add pictures, comment, or submit
+	-- Users can only add, delete, and modify their own pictures and galleries.
+	-- Each member has their own homepage that can have its color and font customized
+	-- Users can follow other users and get alerts when they create new public content
 - Best practices and security (5 points)
 	-- Code passes HTML validation (2 points)
 	-- Code is well formatted and easy to read, with proper commenting (2 points)
 	-- Validate method arguments with package mdg:validate-method
+	-- Passwords hashed
 - Usability (5 points)
 	-- Site is visually appealing (1 point)
-	-- Site is intuitive and easy to navigate (4 points)
-- Creative portion (10-15 points)
+	-- Adding content is intuitive (2 points)
+	-- Navigating between different pages is intuitive (2 points)
+- Creative portion (15-20 points)
+	-- editor's notes on open gallery submissions?
+	-- customization for layout for specific galleries?
+	-- search function? tags?
 
-### Creative Portion ###
-
-### What is this repository for? ###
-
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
-
-### How do I get set up? ###
-
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
-
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
 * Other community or team contact
