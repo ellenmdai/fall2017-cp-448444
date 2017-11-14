@@ -1,7 +1,7 @@
 # CREATIVE PROJECT RUBRIC #
 * idea: A combined photo storage and photoblogging site, like Tumblr or Wordpress but with more creative control
 * new framework, technology, or APIs: MeteorJS
-
+Validated by TA Jesse Huang
 ### Point allocations ###
 * Grading rubric turned in by 11/15 (5 points)
 * Photo and gallery management (25 points)
