@@ -12,8 +12,35 @@ var imageStore = new FS.Store.GridFS("images", {
                         // Default: 2MB. Reasonable range: 512KB - 4MB
 });
 
+var createThumb = function(fileObj, readStream, writeStream) {
+  // Transform the image into a 10x10px thumbnail
+  gm(readStream, fileObj.name()).resize('50', '50').stream().pipe(writeStream);
+};
+
 export const Uploads = new FS.Collection('uploads', {
-	stores: [imageStore]
+	stores: [
+		//new FS.Store.GridFS('thumbs', {transformWrite: createThumb}),
+		imageStore
+	],
+	filter: {
+    //maxSize: 1048576, // in bytes
+    allow: {
+      contentTypes: ['image/*'],
+      extensions: ['png']
+    },
+    //deny: {
+    //  contentTypes: ['image/*'],
+    //  extensions: ['png']
+    //},
+	//unnecessary given presence of allow
+    onInvalid: function (message) {
+      if (Meteor.isClient) {
+        alert(message);
+      } else {
+        console.log(message);
+      }
+    }
+  }
 });
 
 if (Meteor.isServer) {
@@ -23,22 +50,28 @@ if (Meteor.isServer) {
 		// add custom authentication code here
 		return true;
 	}
-  })
+  });
   // Only publish tasks that are public or belong to the current user
   Meteor.publish('uploads', function uploadsPublication() {
 	// stuff here
+	return Uploads.find();
   });
 }
 
 Meteor.methods({
-  'uploads.insert'(file) {
-    check(file, String);
+  'uploads.insert'(file, caption) {
+    //check(file, File???????); lookup
+	check(caption, String);
     // Make sure the user is logged in before inserting a task
     if (! Meteor.userId()) {
       throw new Meteor.Error('not-authorized');
     }
-	FS.Utility.eachFile(event, function(file) {
-		Uploads.insert(file, function(err, fileObj) {
+	FS.Utility.eachFile(event, function(file, caption) {
+		// from https://forums.meteor.com/t/insert-data-to-collectionfs-cfs-filesystem-cfs-standard-packages/5304/3
+		var tmpdoc = new FS.File(file);
+		tmpdoc.owner = Meteor.userId();
+		tmpdoc.caption = "filler caption here: " + caption;
+		Uploads.insert(tmpdoc, function(err, fileObj) {
 			// Inserted new doc with ID fileObj._id, and kicked off the data upload using HTTP
 		});
 	});
@@ -59,4 +92,9 @@ Meteor.methods({
     }  
     Uploads.remove(uploadId);
   },
+  'uploads.display-users-all'(user) {
+	//images: function () {
+		return Uploads.find(); // Where Images is an FS.Collection instance
+	//}
+  }
 });

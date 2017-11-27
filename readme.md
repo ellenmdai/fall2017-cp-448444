@@ -5,6 +5,7 @@ meteor add accounts-ui accounts-password -- done
 WHEN READY FOR SECURITY: meteor remove insecure
 WHEN READY FOR PRIVACY:  meteor remove autopublish
 FOR TESTING????: meteor add practicalmeteor:mocha
+for thumbnails: meteor add cfs:graphicsmagick
 
 kill -9 `ps ax | grep node | grep meteor | awk '{print $1}'`
 
@@ -14,3 +15,13 @@ meteor add pahans:reactive-modal
 
 TODO:
 initiate the upload in uploads.js-- event????
+
+
+do all inserting on client side
+
+
+
+creative:
+look into drop zone
+lookup check()
+modal dialog boxes
