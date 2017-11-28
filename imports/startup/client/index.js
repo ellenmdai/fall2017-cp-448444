@@ -1,1 +1,1 @@
-boo
+import './routes.js';

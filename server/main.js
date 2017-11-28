@@ -4,5 +4,5 @@
 //  // code to run on server at startup
 //});
 
-//import '../imports/api/uploads.js';
+import '../imports/api/uploads.js';
 //import '../imports/api/galleries.js';

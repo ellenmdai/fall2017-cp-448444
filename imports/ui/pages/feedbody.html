@@ -1,4 +1,3 @@
-<template name='feedbody'>
 <body>
   <div class="main">
     <header>
@@ -26,18 +25,15 @@
         {{> gallery-in-feed}}
       {{/each}}-->
       feed placeholder<br>
-      <template name="imageView">
         <div class="imageView">
-          {{#each images}}
+          {{#each uploads}}
             <div>
-              <a href="{{this.url}}" target="_blank"><img src="{{this.url store='thumbs' uploading='/images/uploading.gif' storing='/images/storing.gif'}}" alt="" class="thumbnail" /></a>
+              <a href="{{this.url}}" target="_blank"><img src="{{this.url store='imageStore' }}" alt="image not loading" class="placeholderclass" /></a>
               Owner: {{owner}} <br>
               Caption: {{caption}} <br>
             </div>
           {{/each}}
         </div>
-      </template>
     </div>
   </div>
 </body>
-</template>

@@ -7,4 +7,6 @@ Router.route('/', function () {
   this.render('feedbody');
 });
 
-Router.route('/items');
+Router.route('/myPortfolio', function() {
+	this.render('portfolio');
+});

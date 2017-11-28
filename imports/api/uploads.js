@@ -1,21 +1,19 @@
 import { Meteor } from 'meteor/meteor';
-import { GridFS } from 'meteor/cfs:gridfs';
+import { FileSystem } from 'meteor/cfs:filesystem';
 import { Mongo } from 'meteor/mongo';
 import { check } from 'meteor/check';
 
-var imageStore = new FS.Store.GridFS("images", {
-  //mongoOptions: {...},  // optional, see note below
+var imageStore = new FS.Store.FileSystem("images", {
+  path: "../../uploads/images", //optional, default is "/cfs/files" path within app container
   //transformWrite: myTransformWriteFunction, //optional
   //transformRead: myTransformReadFunction, //optional
-  //maxTries: 1, // optional, default 5
-  //chunkSize: 1024*1024  // optional, default GridFS chunk size in bytes (can be overridden per file).
-                        // Default: 2MB. Reasonable range: 512KB - 4MB
+  //maxTries: 1 //optional, default 5
 });
 
-var createThumb = function(fileObj, readStream, writeStream) {
-  // Transform the image into a 10x10px thumbnail
-  gm(readStream, fileObj.name()).resize('50', '50').stream().pipe(writeStream);
-};
+//var createThumb = function(fileObj, readStream, writeStream) {
+//  // Transform the image into a 10x10px thumbnail
+//  gm(readStream, fileObj.name()).resize('50', '50').stream().pipe(writeStream);
+//};
 
 export const Uploads = new FS.Collection('uploads', {
 	stores: [
@@ -24,7 +22,8 @@ export const Uploads = new FS.Collection('uploads', {
 	],
 	filter: {
     //maxSize: 1048576, // in bytes
-    allow: {
+    //ADD BACK LATER
+		allow: {
       contentTypes: ['image/*'],
       extensions: ['png']
     },
@@ -59,22 +58,26 @@ if (Meteor.isServer) {
 }
 
 Meteor.methods({
-  'uploads.insert'(file, caption) {
+  'uploads.insert'(files, caption) {
     //check(file, File???????); lookup
-	check(caption, String);
+	//check(caption, String); // causes match error if empty
     // Make sure the user is logged in before inserting a task
     if (! Meteor.userId()) {
       throw new Meteor.Error('not-authorized');
     }
-	FS.Utility.eachFile(event, function(file, caption) {
-		// from https://forums.meteor.com/t/insert-data-to-collectionfs-cfs-filesystem-cfs-standard-packages/5304/3
-		var tmpdoc = new FS.File(file);
-		tmpdoc.owner = Meteor.userId();
-		tmpdoc.caption = "filler caption here: " + caption;
-		Uploads.insert(tmpdoc, function(err, fileObj) {
-			// Inserted new doc with ID fileObj._id, and kicked off the data upload using HTTP
-		});
-	});
+		console.log(files);
+		console.log(caption);
+		for (var i = 0; i < files.length; i++) {
+			// from https://forums.meteor.com/t/insert-data-to-collectionfs-cfs-filesystem-cfs-standard-packages/5304/3
+			var tmpdoc = new FS.File(files[i]);
+			tmpdoc.owner = Meteor.userId();
+			tmpdoc.caption = "filler caption here: " + caption;
+			Uploads.insert(tmpdoc, function(err, fileObj) {
+				// Inserted new doc with ID fileObj._id, and kicked off the data upload using HTTP
+			});
+			console.log("uploads.insert loop ran.");
+		}
+		console.log("uploads.insert ran, but not the inserting loop.");
 //    Uploads.insert({
 //      image: what,
 //      createdAt: new Date(),

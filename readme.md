@@ -6,6 +6,9 @@ WHEN READY FOR SECURITY: meteor remove insecure
 WHEN READY FOR PRIVACY:  meteor remove autopublish
 FOR TESTING????: meteor add practicalmeteor:mocha
 for thumbnails: meteor add cfs:graphicsmagick
+for routing: meteor add kadira:flow-router
+meteor add iron:router
+meteor add jquery
 
 kill -9 `ps ax | grep node | grep meteor | awk '{print $1}'`
 
@@ -15,6 +18,11 @@ meteor add pahans:reactive-modal
 
 TODO:
 initiate the upload in uploads.js-- event????
+move uploading to uploads.js instead of upload-box.js
+get image to display on page, not just on click
+css
+routing pages
+template error?????
 
 
 do all inserting on client side

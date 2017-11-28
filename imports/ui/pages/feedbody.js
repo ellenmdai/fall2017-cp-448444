@@ -11,7 +11,7 @@ import '../components/upload-box.js';
 
 Template.body.onCreated(function bodyOnCreated() {
   this.state = new ReactiveDict();
-//  Meteor.subscribe('tasks');
+  Meteor.subscribe('uploads');
 });
 
 //Template.body.helpers({
@@ -29,6 +29,13 @@ Template.body.onCreated(function bodyOnCreated() {
 //  },
 //});
 //
+
+Template.body.helpers({
+  uploads: function() {
+    return Uploads.find();
+  }
+});
+
 Template.body.events({
   'click .goto-upload'(event) {
     event.preventDefault();
@@ -36,21 +43,4 @@ Template.body.events({
     alert("upload button clicked.  Will add modal later.");
     //$('#upload-box').dialog('show');
   }
-//  'submit .new-task'(event) {
-//    // Prevent default browser form submit
-//    event.preventDefault();
-//    console.log(event);
-//    // Get value from form element
-//    const target = event.target;
-//    const text = target.text.value;
-// 
-//    // Insert a task into the collection
-//    Metoer.call('tasks.insert', text);
-// 
-//    // Clear form
-//    target.text.value = '';
-//  },
-//  'change .hide-completed input'(event, instance) {
-//    instance.state.set('hideCompleted', event.target.checked);
-//  },
 });
