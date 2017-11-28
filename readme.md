@@ -22,6 +22,7 @@ move uploading to uploads.js instead of upload-box.js
 get image to display on page, not just on click
 css
 routing pages
+get upload_box to actually be a modal box
 template error?????
 
 

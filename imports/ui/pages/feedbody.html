@@ -1,24 +1,7 @@
 <body>
   <div class="main">
-    <header>
-      <h1>Photoblogger</h1>
-      
-      {{> loginButtons}}
-      
-      {{#if currentUser}}
-          <button type="button" class="my-page">My page</button>
-          <button type="button" class="goto-upload">Upload</button>
-          <button type="button" class="notifications">Notifications</button>
-          <br><br>
-          <label id="show-subscribe-only">
-            <input type="checkbox" />
-            Only show subscribed users
-          </label>
-      {{/if}}
-      
-      {{> upload_box}}
-      
-    </header>
+    
+    {{> headerTemplate}}
  
     <div class='feed'>
       <!--{{#each galleries}}

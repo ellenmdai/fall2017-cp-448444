@@ -1,19 +1,11 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
-import {ReactiveDict} from 'meteor/reactive-dict';
+import { JQuery } from 'meteor/jquery';
 
-import { Galleries } from '../../api/galleries.js';
-import { Uploads } from '../../api/uploads.js';  // for testingn only; remove later
+//import { Uploads } from '../../api/uploads.js';
 
-import './gallery-in-feed.js';
-import './feedbody.html';
-//import '../components/upload-box.js';
-import '../components/header.js';
-
-Template.body.onCreated(function bodyOnCreated() {
-  this.state = new ReactiveDict();
-  Meteor.subscribe('uploads');
-});
+import './header.html';
+import './upload-box.js';
 
 //Template.body.helpers({
 //  tasks() {
@@ -31,17 +23,15 @@ Template.body.onCreated(function bodyOnCreated() {
 //});
 //
 
-Template.body.helpers({
-  uploads: function() {
-    return Uploads.find();
-  }
+Template.headerTemplate.helpers({
+  
 });
 
-Template.body.events({
+Template.headerTemplate.events({
   'click .goto-upload'(event) {
     event.preventDefault();
     console.log(event);
     alert("upload button clicked.  Will add modal later.");
-    //$('#upload-box').dialog('show');
+    $('#upload_box').dialog('show');
   }
 });
