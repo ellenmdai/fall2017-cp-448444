@@ -7,7 +7,7 @@ import { Uploads } from '../../api/uploads.js';  // for testingn only; remove la
 
 import './gallery-in-feed.js';
 import './feedbody.html';
-//import '../components/upload-box.js';
+import '../components/uploads-grid.js';
 import '../components/header.js';
 
 Template.body.onCreated(function bodyOnCreated() {

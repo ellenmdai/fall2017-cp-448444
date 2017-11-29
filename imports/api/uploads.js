@@ -1,13 +1,24 @@
 import { Meteor } from 'meteor/meteor';
 import { FileSystem } from 'meteor/cfs:filesystem';
+import { GridFS } from 'meteor/cfs:gridfs';
 import { Mongo } from 'meteor/mongo';
 import { check } from 'meteor/check';
 
-var imageStore = new FS.Store.FileSystem("images", {
-  path: "../../uploads/images", //optional, default is "/cfs/files" path within app container
+//var imageStore = new FS.Store.FileSystem("images", {
+//  path: "../../uploads/images", //optional, default is "/cfs/files" path within app container
+//  //transformWrite: myTransformWriteFunction, //optional
+//  //transformRead: myTransformReadFunction, //optional
+//  //maxTries: 1 //optional, default 5
+//});
+
+var imageStore = new FS.Store.GridFS("images", {
+  //mongoUrl: 'mongodb://127.0.0.1:27017/test/', // optional, defaults to Meteor's local MongoDB
+  //mongoOptions: {...},  // optional, see note below
   //transformWrite: myTransformWriteFunction, //optional
   //transformRead: myTransformReadFunction, //optional
-  //maxTries: 1 //optional, default 5
+  //maxTries: 1, // optional, default 5
+  //chunkSize: 1024*1024  // optional, default GridFS chunk size in bytes (can be overridden per file).
+  //                      // Default: 2MB. Reasonable range: 512KB - 4MB
 });
 
 //var createThumb = function(fileObj, readStream, writeStream) {
@@ -25,7 +36,7 @@ export const Uploads = new FS.Collection('uploads', {
     //ADD BACK LATER
 		allow: {
       contentTypes: ['image/*'],
-      extensions: ['png']
+      //extensions: ['png']
     },
     //deny: {
     //  contentTypes: ['image/*'],
@@ -63,6 +74,7 @@ Meteor.methods({
 	//check(caption, String); // causes match error if empty
     // Make sure the user is logged in before inserting a task
     if (! Meteor.userId()) {
+			alert("You are not logged in.");
       throw new Meteor.Error('not-authorized');
     }
 		console.log(files);

@@ -7,13 +7,13 @@ WHEN READY FOR PRIVACY:  meteor remove autopublish
 FOR TESTING????: meteor add practicalmeteor:mocha
 for thumbnails: meteor add cfs:graphicsmagick
 for routing: meteor add kadira:flow-router
-meteor add iron:router
-meteor add jquery
+meteor add iron:router -- done
+meteor add jquery -- done
 
 kill -9 `ps ax | grep node | grep meteor | awk '{print $1}'`
 
 
-used cfs:gridfs to store uploads https://github.com/CollectionFS/Meteor-CollectionFS
+used cfs:filesystem to store uploads https://github.com/CollectionFS/Meteor-CollectionFS
 meteor add pahans:reactive-modal
 
 TODO:
@@ -24,6 +24,9 @@ css
 routing pages
 get upload_box to actually be a modal box
 template error?????
+FIRST THINGS FIRST: replace the imageview in feedbody with uploads_grid
+	ALSO: files not saved after server is stopped?
+	HALLELUJAH IT WORKS now using gridfs after adding packages folder from dude's github https://github.com/badmark/Meteor-CollectionFS
 
 
 do all inserting on client side
