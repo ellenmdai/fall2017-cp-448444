@@ -1,16 +1,10 @@
 import { Meteor } from 'meteor/meteor';
-import { FileSystem } from 'meteor/cfs:filesystem';
+//import { FileSystem } from 'meteor/cfs:filesystem';
 import { GridFS } from 'meteor/cfs:gridfs';
 import { Mongo } from 'meteor/mongo';
 import { check } from 'meteor/check';
 
-//var imageStore = new FS.Store.FileSystem("images", {
-//  path: "../../uploads/images", //optional, default is "/cfs/files" path within app container
-//  //transformWrite: myTransformWriteFunction, //optional
-//  //transformRead: myTransformReadFunction, //optional
-//  //maxTries: 1 //optional, default 5
-//});
-
+// setting up the collection based on https://github.com/CollectionFS/Meteor-CollectionFS#storage-adapters
 var imageStore = new FS.Store.GridFS("images", {
   //mongoUrl: 'mongodb://127.0.0.1:27017/test/', // optional, defaults to Meteor's local MongoDB
   //mongoOptions: {...},  // optional, see note below
@@ -21,14 +15,14 @@ var imageStore = new FS.Store.GridFS("images", {
   //                      // Default: 2MB. Reasonable range: 512KB - 4MB
 });
 
-//var createThumb = function(fileObj, readStream, writeStream) {
-//  // Transform the image into a 10x10px thumbnail
-//  gm(readStream, fileObj.name()).resize('50', '50').stream().pipe(writeStream);
-//};
+var createThumb = function(fileObj, readStream, writeStream) {
+  // Transform the image into a 10x10px thumbnail
+  gm(readStream, fileObj.name()).resize('50', '50').stream().pipe(writeStream);
+};
 
 export const Uploads = new FS.Collection('uploads', {
 	stores: [
-		//new FS.Store.GridFS('thumbs', {transformWrite: createThumb}),
+		new FS.Store.GridFS('thumbs', {transformWrite: createThumb}),
 		imageStore
 	],
 	filter: {
@@ -56,8 +50,16 @@ export const Uploads = new FS.Collection('uploads', {
 if (Meteor.isServer) {
   // This code only runs on the server
   Uploads.allow({
-	'insert': function() {
-		// add custom authentication code here
+	'insert': function(){
+		return true;
+	},
+	'update': function(){
+		return true;
+	},
+	'remove': function(){
+		return true;
+	},
+	'download': function(){
 		return true;
 	}
   });
@@ -84,8 +86,10 @@ Meteor.methods({
 			var tmpdoc = new FS.File(files[i]);
 			tmpdoc.owner = Meteor.userId();
 			tmpdoc.caption = "filler caption here: " + caption;
+			tmpdoc.url = 
 			Uploads.insert(tmpdoc, function(err, fileObj) {
 				// Inserted new doc with ID fileObj._id, and kicked off the data upload using HTTP
+				
 			});
 			console.log("uploads.insert loop ran.");
 		}
@@ -100,12 +104,13 @@ Meteor.methods({
   },
   'uploads.remove'(uploadId) {
     check(uploadId, String);
-	const upload = Tasks.findOne(uploadId);
+	const upload = Uploads.findOne({_id: uploadId});
     if (upload.owner !== Meteor.userId()) {
       //make sure only the owner can delete it
+	  alert("You are the the owner of this image. Cannot delete.")
       throw new Meteor.Error('not-authorized');
     }  
-    Uploads.remove(uploadId);
+    Uploads.remove({_id: uploadId});
   },
   'uploads.display-users-all'(user) {
 	//images: function () {

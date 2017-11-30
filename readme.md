@@ -24,7 +24,16 @@ css
 routing pages
 get upload_box to actually be a modal box
 template error?????
+uploads-grid helper firing multiple times?
 FIRST THINGS FIRST: replace the imageview in feedbody with uploads_grid
+	why is .find({id}) giving me nothing?
+	
+	
+Showalluseruploads runs twice on initial (first time returns nothing),
+	4 times on upload, once on delete
+	
+	
+DONE:
 	ALSO: files not saved after server is stopped?
 	HALLELUJAH IT WORKS now using gridfs after adding packages folder from dude's github https://github.com/badmark/Meteor-CollectionFS
 
