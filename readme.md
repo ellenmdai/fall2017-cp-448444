@@ -9,6 +9,9 @@ for thumbnails: meteor add cfs:graphicsmagick
 for routing: meteor add kadira:flow-router
 meteor add iron:router -- done
 meteor add jquery -- done
+meteor add raix:ui-dropped-event for drop zone
+meteor add msavin:mongol
+
 
 kill -9 `ps ax | grep node | grep meteor | awk '{print $1}'`
 
@@ -50,3 +53,5 @@ creative:
 look into drop zone
 lookup check()
 modal dialog boxes
+
+http://experimentsinmeteor.com/photo-blog-part-1/

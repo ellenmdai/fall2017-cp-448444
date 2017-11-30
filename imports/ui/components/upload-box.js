@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
+import {Dropzone} from 'meteor/raix:ui-dropped-event';
 import { Uploads } from '../../api/uploads.js';
 import './upload-box.html';
  
@@ -52,4 +53,7 @@ Template.upload_box.events({
     document.getElementById('image-to-upload').value = '';
 	document.getElementById('image-to-upload-caption').value = '';
   },
+  'dropped #dropzone': function(e) {
+    console.log('dropped a file');
+  }
 });

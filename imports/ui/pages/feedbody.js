@@ -13,7 +13,7 @@ import '../components/header.js';
 
 //Router.route('/', {template: 'feedbody'});  //no template named feedbody
 
-Template.body.onCreated(function bodyOnCreated() {
+Template.feedbody.onCreated(function bodyOnCreated() {
   this.state = new ReactiveDict();
   Meteor.subscribe('uploads');
 });
@@ -34,13 +34,13 @@ Template.body.onCreated(function bodyOnCreated() {
 //});
 //
 
-Template.body.helpers({
+Template.feedbody.helpers({
   uploads: function() {
     return Uploads.find();
   }
 });
 
-Template.body.events({
+Template.feedbody.events({
   'click .goto-upload'(event) {
     event.preventDefault();
     console.log(event);

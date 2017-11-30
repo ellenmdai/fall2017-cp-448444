@@ -2,8 +2,18 @@
 <body>
 	{{> headerTemplate}}
 	<div class="main">
-		Testing routing woooo<br>
-		<h1>Galleries</h1>
+		<h1>Galleries</h1><button id='new_gallery_btn' value='new_gallery_btn'>Create new gallery</button><br>
+		<div id='new_gallery_div'>
+			<form id="new_gallery_form" method="post" enctype="multipart/form-data">
+				Gallery name: <input type="text" name="newGalName" id="newGalName" /><br>
+				Select desired images:<br><select name="imageSelector" id="imageSelector" multiple size='10'>
+					{{#each uploads}}
+						<option value="{{this._id}}">{{this.name}}</option>
+					{{/each}}
+				</select>
+				<input type="submit" value="Create" name="newGal" />
+			</form>
+		</div>
 		<br><hr><br>
 		<h1>Uploads</h1>
 			{{> uploads_grid}}

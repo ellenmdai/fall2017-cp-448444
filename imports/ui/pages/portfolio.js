@@ -10,7 +10,21 @@ import './portfolio.html';
 import '../components/uploads-grid.js';
 import '../components/header.js';
 
-Template.body.onCreated(function bodyOnCreated() {
+Template.portfolio.onCreated(function bodyOnCreated() {
   this.state = new ReactiveDict();
   Meteor.subscribe('uploads');
+});
+
+Template.portfolio.helpers({
+  uploads: function() {
+    return Uploads.find();
+  }
+});
+
+Template.portfolio.events({
+  'click #new_gallery_btn'() {
+    event.preventDefault();
+    console.log(event);
+    alert("new gallery button clicked.  Will add modal later.");
+  }
 });
