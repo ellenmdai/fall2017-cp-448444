@@ -10,7 +10,7 @@ Template.uploads_grid.onCreated(function() {
   //Meteor.subscribe('uploads');
 });
 
-Template.uploads_grid.onRendered(function bodyOnCreated() {
+Template.uploads_grid.onRendered(function() {
   //Meteor.subscribe('uploads');
   //Meteor.call('uploads_grid.showAllofUsers');
 });

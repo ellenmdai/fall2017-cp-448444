@@ -25,12 +25,16 @@ routing pages
 get upload_box to actually be a modal box
 template error?????
 uploads-grid helper firing multiple times?
-FIRST THINGS FIRST: replace the imageview in feedbody with uploads_grid
+replace the imageview in feedbody with uploads_grid
 	why is .find({id}) giving me nothing?
+	
+FIRST THINGS FIRST: router.go() doing database querying before new page loads...
+dialog boxes, can use jquery?
 	
 	
 Showalluseruploads runs twice on initial (first time returns nothing),
 	4 times on upload, once on delete
+Router.go doesn't show queries because they are run before the new page is loaded
 	
 	
 DONE:

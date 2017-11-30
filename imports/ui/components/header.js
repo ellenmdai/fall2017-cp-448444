@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { JQuery } from 'meteor/jquery';
+import { Router } from 'meteor/iron:router';
 
 //import { Uploads } from '../../api/uploads.js';
 
@@ -32,6 +33,16 @@ Template.headerTemplate.events({
     event.preventDefault();
     console.log(event);
     alert("upload button clicked.  Will add modal later.");
-    $('#upload_box').dialog('show');
+    this.$('#upload-box').dialog();
+  },
+  'click .my-page'(event) {
+    event.preventDefault();
+    console.log(event);
+    Router.go('/portfolio');
+  },
+  'click .home'(event) {
+    event.preventDefault();
+    console.log(event);
+    Router.go('home');
   }
 });

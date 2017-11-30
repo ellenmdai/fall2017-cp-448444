@@ -1,7 +1,14 @@
 <template name="portfolio">
 <body>
+	{{> headerTemplate}}
 	<div class="main">
-		Testing routing woooo
+		Testing routing woooo<br>
+		<h1>Galleries</h1>
+		<br><hr><br>
+		<h1>Uploads</h1>
+			{{> uploads_grid}}
+		<!--TODO: make uploads section only appear if this is the user's portfolio-->
+		<br><hr><br>
 	</div>
-<body>
+</body>
 </template>
