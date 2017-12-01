@@ -21,15 +21,10 @@ meteor add pahans:reactive-modal
 
 TODO:
 initiate the upload in uploads.js-- event????
-move uploading to uploads.js instead of upload-box.js
 get image to display on page, not just on click
 css
-routing pages
 get upload_box to actually be a modal box
-template error?????
 uploads-grid helper firing multiple times?
-replace the imageview in feedbody with uploads_grid
-	why is .find({id}) giving me nothing?
 	
 FIRST THINGS FIRST: router.go() doing database querying before new page loads...
 dialog boxes, can use jquery?

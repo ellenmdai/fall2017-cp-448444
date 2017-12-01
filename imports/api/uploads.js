@@ -30,13 +30,7 @@ export const Uploads = new FS.Collection('uploads', {
     //ADD BACK LATER
 		allow: {
       contentTypes: ['image/*'],
-      //extensions: ['png']
     },
-    //deny: {
-    //  contentTypes: ['image/*'],
-    //  extensions: ['png']
-    //},
-	//unnecessary given presence of allow
     onInvalid: function (message) {
       if (Meteor.isClient) {
         alert(message);

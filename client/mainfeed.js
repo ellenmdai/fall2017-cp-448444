@@ -15,3 +15,26 @@ Router.route('/', function() {
 Router.route('/portfolio', function() {
 	this.render('portfolio');
 });
+Router.route('/cfs/files/uploads/:imageId', function() {
+	var imageId = this.params.imageId;
+	
+	  // Read from a CollectionFs FS.File
+	  // Assumes you have a "Pdfs" CollectionFs
+	  var image = Pdfs.findOne({_id: imageId});
+	  var readable = image.createReadStream("tmp");
+	  var buffer = new Buffer(0);
+	  readable.on("data", function(buffer) {
+		buffer = buffer.concat([buffer, readable.read()]);
+	  });
+	  readable.on("end", function() {
+		this.response.writeHead(200, {
+		  //"Content-Type": "application/pdf",
+		  "Content-Length": buffer.length
+		});
+		this.response.write(buffer);
+		this.response.end();
+	  });
+	}, {
+	  where: "server"
+	}
+);
