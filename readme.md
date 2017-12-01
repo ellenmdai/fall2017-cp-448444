@@ -27,8 +27,9 @@ get upload_box to actually be a modal box
 uploads-grid helper firing multiple times?
 router.go() doing database querying before new page loads...
 dialog boxes, can use jquery?
+filter galleries by subscription, using instance states (see feedbody)
 	
-FIRST THINGS FIRST: get galleries to insert
+FIRST THINGS FIRST: 
 	
 	
 Showalluseruploads runs twice on initial (first time returns nothing),

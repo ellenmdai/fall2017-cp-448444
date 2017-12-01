@@ -6,8 +6,8 @@ import {Router} from 'meteor/iron:router';
 import { Galleries } from '../../api/galleries.js';
 import { Uploads } from '../../api/uploads.js';  // for testingn only; remove later
 
-import './gallery-in-feed.js';
 import './feedbody.html';
+import '../components/gallery-in-feed.js';
 import '../components/uploads-grid.js';
 import '../components/header.js';
 
@@ -35,6 +35,10 @@ Template.feedbody.onCreated(function bodyOnCreated() {
 Template.feedbody.helpers({
   uploads: function() {
     return Uploads.find();
+  },
+  galleries: function() {
+    return Galleries.find();
+    //TODO: filter by subscriptions
   }
 });
 

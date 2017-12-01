@@ -2,6 +2,13 @@
   <div class="main">
     
     {{> headerTemplate}}
+    
+    {{#if currentUser}}
+      <label id="show-subscribe-only">
+        <input type="checkbox" />
+        Only show subscribed users
+      </label>
+    {{/if}}
  
     <div class='feed'>
       <!--{{#each galleries}}
