@@ -28,7 +28,7 @@ Template.portfolio.events({
     console.log(event);
     alert("new gallery button clicked.  Will add modal later.");
   },
-  'click #newGal'(event) {
+  'submit #new_gallery_form'(event) {
     event.preventDefault();
     var galName = document.getElementById('newGalName').value;
     var selectedImages = $('#imageSelector').val(); // array of image ids
