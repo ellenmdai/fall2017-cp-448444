@@ -29,6 +29,7 @@ router.go() doing database querying before new page loads...
 dialog boxes, can use jquery?
 filter galleries by subscription, using instance states (see feedbody)
 hyperlink username in feed_in_gallery to their page.
+check that featured and not featured show up in same grid.
 	
 FIRST THINGS FIRST: 
 	
@@ -41,7 +42,7 @@ Router.go doesn't show queries because they are run before the new page is loade
 DONE:
 	ALSO: files not saved after server is stopped?
 	HALLELUJAH IT WORKS now using gridfs after adding packages folder from dude's github https://github.com/badmark/Meteor-CollectionFS
-
+	Currently gallery-grid is not used, keeping it there just in case, but delete at end.
 
 do all inserting on client side
 

@@ -5,6 +5,8 @@ import { Uploads } from '../../api/uploads.js';
 
 import './gallery-grid.html';
 
+var grid;
+
 Template.gallery_grid.onCreated(function() {
   //Meteor.subscribe('uploads');
 });
@@ -12,6 +14,7 @@ Template.gallery_grid.onCreated(function() {
 Template.gallery_grid.onRendered(function() {
   //Meteor.subscribe('uploads');
   //Meteor.call('uploads_grid.showAllofUsers');
+  grid = this.find('.gg_grid_body');
 });
 
 Template.gallery_grid.helpers({
@@ -19,10 +22,18 @@ Template.gallery_grid.helpers({
   //  return Uploads.find();
   //}
   loadImages() {
-    if (document.getElementById('gg_body_grid')) {
-      //NOT WORKING WHYYYYY
-      document.getElementById('gg_grid_body').innerHTML = ''; // clear table
+    console.log("gallery id: ");
+    console.log(this.galleryId);
+    if (this.isFeatured) {
+      grid.setAttribute('id', this.galleryId + "_ggF");
     }
+    else {
+      grid.setAttribute('id', this.galleryId + "_gg");
+    }
+    //if (document.getElementById('gg_body_grid')) {
+    //  //NOT WORKING WHYYYYY
+    //  document.getElementById('gg_grid_body').innerHTML = ''; // clear table
+    //}
     //console.log(this.imgIds);
     //console.log(this.isFeatured);
     var img;
@@ -30,10 +41,10 @@ Template.gallery_grid.helpers({
     var newEntry;
     var newEntryHyperlink;
     var newEntryImage;
-    for (var i = 0; i < this.imgIds; i++) {
+    for (var i = 0; i < this.imgIds.length; i++) {
       if (i % 4 === 0) {
         if (newRow !== undefined) { //working or not????
-          document.getElementById('ug_grid_body').appendChild(newRow);
+          grid.appendChild(newRow);
         }
         newRow = document.createElement('tr');
       }
@@ -53,7 +64,7 @@ Template.gallery_grid.helpers({
       //newEntry.innerHTML += "<br>Caption: " + theUpload.caption + "<br>Owner: " + theUpload.owner + "<br>";
       newRow.appendChild(newEntry);
     }
-    document.getElementById('gg_grid_body').appendChild(newRow);
+    grid.appendChild(newRow);
   }
 });
 
