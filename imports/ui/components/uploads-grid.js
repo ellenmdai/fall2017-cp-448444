@@ -68,7 +68,7 @@ Meteor.methods({
     foundUploads.forEach(function(theUpload) {
       if (i % 4 === 0) {
         if (newRow !== undefined) {
-          document.getElementById('ug_grid_body').appendChild(newRow);
+          Template.instance().find('#ug_grid_body').appendChild(newRow);
         }
         newRow = document.createElement('tr');
       }
@@ -99,6 +99,6 @@ Meteor.methods({
       newRow.appendChild(newEntry);
       i++;
     });
-    document.getElementById('ug_grid_body').appendChild(newRow);
+    Template.instance().find('#ug_grid_body').appendChild(newRow);
   },
 });

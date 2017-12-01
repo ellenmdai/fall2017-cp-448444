@@ -19,6 +19,9 @@ Template.portfolio.onCreated(function bodyOnCreated() {
 Template.portfolio.helpers({
   usersUploads: function() {
     return Uploads.find({owner: Meteor.userId()});
+  },
+  usersGalleries: function() {
+    return Galleries.find({owner: Meteor.userId()});
   }
 });
 

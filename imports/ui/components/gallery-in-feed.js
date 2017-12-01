@@ -23,8 +23,8 @@ Template.gallery_in_feed.helpers({
     //  //NOT WORKING WHYYYYY
     //  document.getElementById('gg_grid_body').innerHTML = ''; // clear table
     //}
-    console.log(this.regImages);
-    console.log(this.featured);
+    //console.log(this.regImages);
+    //console.log(this.featured);
     var img;
     var newRow;
     var newEntry;
@@ -41,7 +41,7 @@ Template.gallery_in_feed.helpers({
         newRow = document.createElement('tr');
       }
       img = Uploads.findOne({_id: this.featured[i]});
-      console.log(img);
+      //console.log(img);
       newEntry = document.createElement('td');
       newEntry.setAttribute('class', 'gallery_cell');
       newEntryHyperlink = document.createElement('a');
@@ -67,7 +67,7 @@ Template.gallery_in_feed.helpers({
         newRow = document.createElement('tr');
       }
       img = Uploads.findOne({_id: this.regImages[i]});
-      console.log(img);
+      //console.log(img);
       newEntry = document.createElement('td');
       newEntry.setAttribute('class', 'gallery_cell');
       newEntryHyperlink = document.createElement('a');
