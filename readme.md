@@ -28,6 +28,7 @@ uploads-grid helper firing multiple times?
 router.go() doing database querying before new page loads...
 dialog boxes, can use jquery?
 filter galleries by subscription, using instance states (see feedbody)
+hyperlink username in feed_in_gallery to their page.
 	
 FIRST THINGS FIRST: 
 	

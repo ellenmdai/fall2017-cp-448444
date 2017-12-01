@@ -11,10 +11,11 @@
     {{/if}}
  
     <div class='feed'>
-      <!--{{#each galleries}}
-        {{> gallery-in-feed}}
-      {{/each}}-->
-      feed placeholder<br>
+      {{#each galleries}}
+        {{> gallery_in_feed}}
+        <hr>
+      {{/each}}
+      END GALLERIES START UPLOADS<br>
         <div class="imageView">
           {{#each uploads}}
             <div>

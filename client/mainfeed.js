@@ -1,4 +1,5 @@
 //import '../imports/startup/client';
+import {Meteor} from 'meteor/meteor';
 import {Router} from 'meteor/iron:router';
 import '../imports/startup/client/accounts-config.js';
 import '../imports/ui/pages/feedbody.js';
@@ -13,6 +14,9 @@ Router.route('/', function() {
 	template: 'feedbody'
 });
 Router.route('/portfolio', function() {
+	if (!Meteor.userId()) {
+		this.redirect('home');
+	}
 	this.render('portfolio');
 });
 //Router.route('/cfs/files/uploads/:imageId', function() {

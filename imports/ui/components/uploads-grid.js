@@ -4,7 +4,7 @@ import {ReactiveDict} from 'meteor/reactive-dict';
 import { Uploads } from '../../api/uploads.js';
 
 //import '../components/upload-box.js';
-import './uploads_grid.html';
+import './uploads-grid.html';
 
 Template.uploads_grid.onCreated(function() {
   //Meteor.subscribe('uploads');
@@ -72,7 +72,7 @@ Meteor.methods({
         }
         newRow = document.createElement('tr');
       }
-      console.log(theUpload.url());
+      //console.log(theUpload.url());
       newEntry = document.createElement('td');
       newEntry.setAttribute('class', 'upload_cell');
       newEntryHyperlink = document.createElement('a');

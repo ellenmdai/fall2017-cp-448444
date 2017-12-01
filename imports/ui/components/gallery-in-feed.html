@@ -1,20 +1,16 @@
 <template name="gallery_in_feed">
-  <!--<li class="{{#if checked}}checked{{/if}} {{#if private}}private{{/if}}">
-    <button class="delete">&times;</button>
- 
-    <input type="checkbox" checked="{{checked}}" class="toggle-checked" />
-    
-    {{#if isOwner}}
-      <button class="toggle-private">
-        {{#if private}}
-          Private
-        {{else}}
-          Public
-        {{/if}}
-      </button>
-    {{/if}}
- 
-    <span class="text"><strong>{{username}}</strong> - {{text}}</span>
-  </li>-->
-  Yo yo yo <br><hr><br>
+<div class="gallery_in_feed">
+	<h2>{{name}}</h2> by {{username}}<br>
+	
+	{{#if isOwner}}
+	  <button type="button" class="editGallery" value="{{_id}}">Edit</button><br>
+	{{/if}}
+	
+	<strong>Featured: </strong><br>
+		{{featured}}
+		{{> gallery_grid imgIds=featured isFeatured=true}}
+	<strong>Other: </strong><br>
+		{{regImages}}
+		{{> gallery_grid imgIds=regImages isFeatured=false}}
+</div>
 </template>

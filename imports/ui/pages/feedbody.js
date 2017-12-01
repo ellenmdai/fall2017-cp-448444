@@ -35,7 +35,7 @@ Template.feedbody.onCreated(function bodyOnCreated() {
 Template.feedbody.helpers({
   uploads: function() {
     return Uploads.find();
-  },
+  },  // this is temporary, only for testing.
   galleries: function() {
     return Galleries.find();
     //TODO: filter by subscriptions

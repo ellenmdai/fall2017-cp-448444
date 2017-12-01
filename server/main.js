@@ -9,3 +9,4 @@
 
 import '../imports/api/uploads.js';
 import '../imports/api/galleries.js';
+//import '../imports/ui/components/uploads-grid.js';
