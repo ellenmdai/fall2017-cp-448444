@@ -72,6 +72,7 @@ Meteor.methods({
         }
         newRow = document.createElement('tr');
       }
+      console.log(theUpload.url());
       newEntry = document.createElement('td');
       newEntry.setAttribute('class', 'upload_cell');
       newEntryHyperlink = document.createElement('a');

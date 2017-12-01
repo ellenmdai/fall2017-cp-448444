@@ -11,8 +11,6 @@ import './feedbody.html';
 import '../components/uploads-grid.js';
 import '../components/header.js';
 
-//Router.route('/', {template: 'feedbody'});  //no template named feedbody
-
 Template.feedbody.onCreated(function bodyOnCreated() {
   this.state = new ReactiveDict();
   Meteor.subscribe('uploads');

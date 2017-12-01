@@ -25,9 +25,10 @@ get image to display on page, not just on click
 css
 get upload_box to actually be a modal box
 uploads-grid helper firing multiple times?
-	
-FIRST THINGS FIRST: router.go() doing database querying before new page loads...
+router.go() doing database querying before new page loads...
 dialog boxes, can use jquery?
+	
+FIRST THINGS FIRST: get galleries to insert
 	
 	
 Showalluseruploads runs twice on initial (first time returns nothing),

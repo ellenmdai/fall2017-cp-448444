@@ -88,13 +88,6 @@ Meteor.methods({
 			console.log("uploads.insert loop ran.");
 		}
 		console.log("uploads.insert ran, but not the inserting loop.");
-//    Uploads.insert({
-//      image: what,
-//      createdAt: new Date(),
-//      owner: Meteor.userId(),
-//      caption: "filler caption here: " + text,
-//	  //id????
-//    });
   },
   'uploads.remove'(uploadId) {
     check(uploadId, String);
