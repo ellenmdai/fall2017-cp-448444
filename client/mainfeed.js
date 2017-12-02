@@ -1,9 +1,11 @@
 //import '../imports/startup/client';
-import {Meteor} from 'meteor/meteor';
-import {Router} from 'meteor/iron:router';
+import { Meteor } from 'meteor/meteor';
+import { Router } from 'meteor/iron:router';
+import { Galleries } from '../imports/api/galleries.js';
 import '../imports/startup/client/accounts-config.js';
 import '../imports/ui/pages/feedbody.js';
 import '../imports/ui/pages/portfolio.js';
+import '../imports/ui/pages/editGallery.js';
 
 /*Router code learned from http://meteortips.com/second-meteor-tutorial/iron-router-part-1/
 and http://iron-meteor.github.io/iron-router/*/
@@ -18,6 +20,13 @@ Router.route('/portfolio', function() {
 		this.redirect('home');
 	}
 	this.render('portfolio');
+});
+Router.route('/editGallery/:_galId', function() {
+	this.render('editGallery', {
+		data: function() {
+			return Galleries.findOne({_id: this.params._galId});
+		}
+	});
 });
 //Router.route('/cfs/files/uploads/:imageId', function() {
 //	var imageId = this.params.imageId;

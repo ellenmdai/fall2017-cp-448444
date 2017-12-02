@@ -1,0 +1,39 @@
+<template name="editGallery">
+  <div class="main">
+    
+    {{> headerTemplate}}
+    
+    Edit gallery placeholder {{_id}}<br>
+    
+    <form id="edit_gallery_form" method="post" enctype="multipart/form-data">
+      Gallery name: <input type="text" name="editGalName" id="editGalName" value="{{name}}"/><br>
+      <textarea name='editGalDesc' id='editGalDesc' rows='5' cols='50' placeholder='description'>{{description}}</textarea><br>
+      <hr>
+      Check images to feature:<br>
+      <table id="ug_grid">
+        <thead><tr>
+          <th>Featured</th><th>Regular</th>
+        </tr></thead>
+        <tbody id='select_featured'><tr>
+          <td>
+            {{#each featured}}
+              <input type="checkbox" class="featuredCheck" value="{{_id}}" checked/>{{name}}<br>
+            {{/each}}
+          </td>
+          <td>
+            {{#each regular}}
+              <input type="checkbox" class="featuredCheck" value="{{_id}}" checked/>{{name}}<br>
+            {{/each}}
+          </td>
+        </tr></tbody> 
+      </table>
+      <hr>
+      <label class="hide-completed">
+        <input type="checkbox" id='makeOpen' checked={{open}}/>
+        Make open to submission
+      </label>
+      <input type="submit" value="Edit" name="editGalBtn" id="editGalBtn" />
+    </form>
+		<br><hr><br>
+  </div>
+</template>

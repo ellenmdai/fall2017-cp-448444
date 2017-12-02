@@ -30,7 +30,9 @@ dialog boxes, can use jquery?
 filter galleries by subscription, using instance states (see feedbody)
 hyperlink username in feed_in_gallery to their page.
 check that featured and not featured show up in same grid.
-Template.instance() doesn't always work??? Error: Can't use $ on template instance with no DOM
+Allow multi-pic uploads if time
+if time, do iron router layout and configure and stuff.
+table css: uploads, galleries, selecting featured.
 	
 FIRST THINGS FIRST: 
 	
