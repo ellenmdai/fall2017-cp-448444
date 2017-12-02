@@ -69,15 +69,50 @@ Template.editGallery.events({
     event.preventDefault();
     var gallery = Template.parentData(0);
     console.log(event);
-    console.log(gallery.regImages);
+    //console.log(gallery.regImages);
     var newFeatured = gallery.featured.swapOut(event.target.value);
     var newRegular = gallery.regImages.swapOut(event.target.value);
-    console.log(newRegular);
+    //console.log(newRegular);
     Galleries.update({_id: gallery._id}, {
       $set: {
         featured: newFeatured,
         regImages: newRegular
       }
     });
+  },
+  'click .thumbnail'(event) {
+    event.preventDefault();
+    var gallery = Template.parentData(0);
+    var imgId = event.target.id;
+    console.log(event);
+    console.log("imgId: " + imgId);
+    if (gallery.featured.includes(imgId)) {
+      var newFeatured = gallery.featured;
+      newFeatured.splice(newFeatured.indexOf(imgId), 1);
+      Galleries.update({_id: gallery._id}, {
+        $set: {
+          featured: newFeatured,
+        }
+      });
+    }
+    else if (gallery.regImages.includes(imgId)) {
+      var newRegular = gallery.regImages;
+      newRegular.splice(newRegular.indexOf(imgId),1);
+      Galleries.update({_id: gallery._id}, {
+        $set: {
+          regImages: newRegular,
+        }
+      });
+    }
+    else {
+      var newRegular2 = gallery.regImages;
+      //console.log("regImages: " + gallery.regImages);
+      newRegular2.push(imgId);
+      Galleries.update({_id: gallery._id}, {
+        $set: {
+          regImages: newRegular2,
+        }
+      });
+    }
   }
 });

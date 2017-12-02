@@ -9,11 +9,6 @@
       Gallery name: <input type="text" name="editGalName" id="editGalName" value="{{name}}"/><br>
       <textarea name='editGalDesc' id='editGalDesc' rows='5' cols='50' placeholder='description'>{{description}}</textarea><br>
       <hr>
-			<!--Add and remove images:<br><select name="imageSelector" id="imageSelector" multiple size='10'>
-					{{#each usersUploads}}
-						<option value="{{this._id}}">{{this.name}}</option>
-					{{/each}}
-			</select><br>-->
       Choose which images to include or remove by clicking on the thumbnail.
 			Check the box to feature an image.<br>
       <table id="ug_grid">
@@ -24,18 +19,18 @@
           <td>
             {{#each featured}}
               <input type="checkbox" class="featuredCheck" value="{{_id}}" checked/>
-							<img src="{{this.url store='imageStore'}}" alt="can't display {{name}}" class="thumbnail" /><br>
+							<img src="{{this.url store='imageStore'}}" alt="can't display {{name}}" class="thumbnail" id="{{_id}}" /><br>
             {{/each}}
           </td>
           <td>
             {{#each regular}}
               <input type="checkbox" class="featuredCheck" value="{{_id}}"/>
-							<img src="{{this.url store='imageStore'}}" alt="can't display {{name}}" class="thumbnail" /><br>
+							<img src="{{this.url store='imageStore'}}" alt="can't display {{name}}" class="thumbnail" id="{{_id}}" /><br>
             {{/each}}
           </td>
 					<td>
 						{{#each notIn}}
-							<img src="{{this.url store='imageStore'}}" alt="can't display {{name}}" class="thumbnail" /><br><br>
+							<img src="{{this.url store='imageStore'}}" alt="can't display {{name}}" class="thumbnail" id="{{_id}}" /><br><br>
 						{{/each}}
 					</td>
         </tr></tbody> 
