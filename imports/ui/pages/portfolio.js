@@ -62,6 +62,9 @@ Template.portfolio.events({
       username: Meteor.user().username,
     });
     // clear form?
-    //Template.instance().find('#newGalName').value = "";
+    document.getElementById('newGalName').value = "";
+    document.getElementById('newGalDesc').value = "";
+    // reset select box somehow
+    	alert("Created " + galName);
   }  
 });

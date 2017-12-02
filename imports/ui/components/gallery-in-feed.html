@@ -5,7 +5,7 @@
 	{{#if isOwner}}
 	  <button type="button" class="editGallery" value="{{_id}}">Edit</button><br>
 	{{/if}}
-	
+	{{description}}<br>
 	<!--<strong>Featured: </strong><br>
 		{{featured}}
 		{{> gallery_grid imgIds=featured isFeatured=true galleryId=_id}}
@@ -13,7 +13,6 @@
 		{{regImages}}
 		{{> gallery_grid imgIds=regImages isFeatured=false galleryId=_id}}-->
 	<div class="gallery_grid">
-		gallery_grid placeholder text<br>
 		<table class="gg_grid">
 			<tbody class='gg_grid_body' id='gg_grid_body'>
 				{{loadImages}}

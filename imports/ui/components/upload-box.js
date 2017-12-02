@@ -13,6 +13,7 @@ Template.upload_box.helpers({
 Template.upload_box.events({
 	'submit #upload-form'(event) {
     // Prevent default browser form submit
+	//TODO: check inputs
     event.preventDefault();
     console.log(event);
     // Get value from form element
@@ -20,6 +21,10 @@ Template.upload_box.events({
 	//console.log("file path from upload-box.js: " + document.getElementById('image-to-upload').value);
     const files = Array.from(document.getElementById('image-to-upload').files);
 	console.log(files);
+	if (files.length === 0) {
+		alert("Please select a file to upload.");
+		throw new Meteor.Error('no file selected');
+	}
 	const caption = document.getElementById('image-to-upload-caption').value;
 	console.log(caption);
 	
@@ -32,7 +37,7 @@ Template.upload_box.events({
 			// from https://forums.meteor.com/t/insert-data-to-collectionfs-cfs-filesystem-cfs-standard-packages/5304/3
 			var tmpdoc = new FS.File(files[i]);
 			tmpdoc.owner = Meteor.userId();
-			tmpdoc.caption = "filler caption here: " + caption;
+			tmpdoc.caption = caption;
 			Uploads.insert(tmpdoc, function(err, fileObj) {
 				// Inserted new doc with ID fileObj._id, and kicked off the data upload using HTTP
 			});
