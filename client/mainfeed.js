@@ -21,12 +21,17 @@ Router.route('/portfolio', function() {
 	}
 	this.render('portfolio');
 });
-Router.route('/editGallery/:_galId', function() {
-	this.render('editGallery', {
-		data: function() {
-			return Galleries.findOne({_id: this.params._galId});
-		}
-	});
+Router.route('/editGallery/:_galId', {
+	waitOn: function() {
+		Meteor.subscribe('galleries', this.params._galId);
+	},
+	action: function() {
+		this.render('editGallery', {
+			data: function() {
+				return Galleries.findOne({_id: this.params._galId});
+			}
+		});
+	}
 });
 //Router.route('/cfs/files/uploads/:imageId', function() {
 //	var imageId = this.params.imageId;

@@ -33,6 +33,9 @@ check that featured and not featured show up in same grid.
 Allow multi-pic uploads if time
 if time, do iron router layout and configure and stuff.
 table css: uploads, galleries, selecting featured.
+if time: for adding and removing images from gallery, allow re-adding of submitted images
+scrollable tables
+temporary states in editGallery
 	
 FIRST THINGS FIRST: 
 	

@@ -14,11 +14,18 @@ Template.editGallery.onCreated(function bodyOnCreated() {
   this.state = new ReactiveDict();
   Meteor.subscribe('galleries');
   Meteor.subscribe('uploads');
+  //TODO: figure out how to access data context for below
+  //this.state.set('tmpFeatured', this.featured);
+  //this.state.set('tmpRegular', this.regImages);
   //TODO: code below doesn't belong in onCreated I think...
   //if (this.owner !== Meteor.userId()) {
   //  alert("You are not authorized to edit this gallery.");
   //  Router.go('home');
   //}
+});
+
+Template.editGallery.onRendered(function() {
+  
 });
 
 Template.editGallery.helpers({
@@ -31,6 +38,11 @@ Template.editGallery.helpers({
   regular: function() {
     return Uploads.find({_id: { $in: this.regImages }});
     //TODO: filter by subscriptions
+  },
+  notIn: function() {
+    var allIn = this.featured.concat(this.regImages);
+    console.log(allIn);
+    return Uploads.find( { $and: [ {owner: Meteor.userId()}, {_id: { $not: { $in: allIn } } }  ]});
   }
 });
 
