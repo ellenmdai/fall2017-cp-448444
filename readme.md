@@ -30,6 +30,7 @@ dialog boxes, can use jquery?
 filter galleries by subscription, using instance states (see feedbody)
 hyperlink username in feed_in_gallery to their page.
 check that featured and not featured show up in same grid.
+Template.instance() doesn't always work??? Error: Can't use $ on template instance with no DOM
 	
 FIRST THINGS FIRST: 
 	

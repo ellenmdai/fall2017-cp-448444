@@ -38,6 +38,7 @@ Template.portfolio.events({
       alert("You must give your gallery a name.");
       throw new Meteor.Error('empty-name');
     }
+    var descriptionInput = document.getElementById('newGalDesc').value;
     var selectedImages = $('#imageSelector').val(); // array of image ids
     var isOpen = document.getElementById('makeOpen').checked;
     //check(text, String);
@@ -49,8 +50,10 @@ Template.portfolio.events({
     }
     console.log(selectedImages);
     console.log(galName);
+    console.log(descriptionInput)
     Galleries.insert({
       name: galName,
+      description: descriptionInput,
       regImages: selectedImages,
       featured: [],
       open: isOpen,
@@ -58,5 +61,7 @@ Template.portfolio.events({
       owner: Meteor.userId(),
       username: Meteor.user().username,
     });
-    }  
+    // clear form?
+    //Template.instance().find('#newGalName').value = "";
+  }  
 });
