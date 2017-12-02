@@ -22,7 +22,7 @@
           </td>
           <td>
             {{#each regular}}
-              <input type="checkbox" class="featuredCheck" value="{{_id}}" checked/>{{name}}<br>
+              <input type="checkbox" class="featuredCheck" value="{{_id}}"/>{{name}}<br>
             {{/each}}
           </td>
         </tr></tbody> 
@@ -31,7 +31,7 @@
       <label class="hide-completed">
         <input type="checkbox" id='makeOpen' checked={{open}}/>
         Make open to submission
-      </label>
+      </label><br>
       <input type="submit" value="Edit" name="editGalBtn" id="editGalBtn" />
     </form>
 		<br><hr><br>

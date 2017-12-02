@@ -12,6 +12,7 @@ import '../components/header.js';
 
 Template.editGallery.onCreated(function bodyOnCreated() {
   this.state = new ReactiveDict();
+  Meteor.subscribe('galleries');
   Meteor.subscribe('uploads');
   //TODO: code below doesn't belong in onCreated I think...
   //if (this.owner !== Meteor.userId()) {
@@ -28,11 +29,22 @@ Template.editGallery.helpers({
     return Uploads.find({_id: { $in: this.featured }});
   },
   regular: function() {
-    console.log(this.regImages);
     return Uploads.find({_id: { $in: this.regImages }});
     //TODO: filter by subscriptions
   }
 });
+
+Array.prototype.swapOut = function(str) {
+  var i = this.indexOf(str);
+  var newArray = this;
+  if (i === -1) {
+    newArray.push(str);
+  }
+  else {
+    newArray.splice(i, 1);
+  }
+  return newArray;
+};
 
 Template.editGallery.events({
   //'click .goto-upload'(event) {
@@ -41,4 +53,19 @@ Template.editGallery.events({
   //  alert("upload button clicked.  Will add modal later.");
   //  //$('#upload-box').dialog('show');
   //}
+  'change .featuredCheck'(event) {
+    event.preventDefault();
+    var gallery = Template.parentData(0);
+    console.log(event);
+    console.log(gallery.regImages);
+    var newFeatured = gallery.featured.swapOut(event.target.value);
+    var newRegular = gallery.regImages.swapOut(event.target.value);
+    console.log(newRegular);
+    Galleries.update({_id: gallery._id}, {
+      $set: {
+        featured: newFeatured,
+        regImages: newRegular
+      }
+    });
+  }
 });
