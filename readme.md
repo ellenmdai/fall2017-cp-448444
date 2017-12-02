@@ -38,7 +38,8 @@ scrollable tables
 temporary states in editGallery
 allow viewing of anyone's portfolio, not just your own.
 	
-FIRST THINGS FIRST: 
+FIRST THINGS FIRST: get follow selector to add data to accounts,
+then get feedbody to respond the the follow only checkbox
 	
 	
 Showalluseruploads runs twice on initial (first time returns nothing),

@@ -16,7 +16,23 @@ Template.notifications.onCreated(function bodyOnCreated() {
 
 Template.notifications.helpers({
 	following: function() {
-		return Meteor.user().following;
+		var folIds = Meteor.user().following;
+		console.log(folIds);
+		if (folIds !== undefined) {
+			//for (var i = 0; i < folIds.length; i++) {
+			//	folArray.push(Meteor.users.find( { _id: folIds[i] } ));
+			//}
+			return Meteor.users.find({_id: { $in: folIds }});
+		}
+		return [];
+	},
+	notFollowing: function() {
+		var folIds2 = Meteor.user().following;
+		if (folIds2 !== undefined) {
+			//TODO: get urself off the not following list.
+			return Meteor.users.find({ $and: [{_id: { $not: { $in: folIds2 } } }, {_id: { $not: Meteor.userId() }}] });
+		}
+		return Meteor.users.find();
 	}
 });
 

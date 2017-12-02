@@ -6,21 +6,21 @@
 		<div id='follow_select_div'>
 			<form id="addFollow" method="post" enctype="multipart/form-data">
 				Select a user to follow: <select name="addSelector" id="addSelector">
-					<!--{{#each usersUploads}}
-						<option value="{{this._id}}">{{this.name}}</option>
-					{{/each}}-->
+					{{#each notFollowing}}
+						<option value="{{_id}}">{{username}}</option>
+					{{/each}}
 					<option value="placeholder">placeholder</option>
 				</select><br>
-				<input type="submit" name="addFollowSubmit" id="addFollowSubmit" />
+				<input type="submit" name="addFollowSubmit" id="addFollowSubmit" value="Follow" />
 			</form>
 			<form id="removeFollow" method="post" enctype="multipart/form-data">
 				Select a user to unfollow: <select name="removeSelector" id="removeSelector">
-					<!--{{#each usersUploads}}
-						<option value="{{this._id}}">{{this.name}}</option>
-					{{/each}}-->
+					{{#each following}}
+						<option value="{{_id}}">{{username}}</option>
+					{{/each}}
 					<option value="placeholder2">placeholder2</option>
 				</select><br>
-				<input type="submit" name="removeFollowSubmit" id="removeFollowSubmit" />
+				<input type="submit" name="removeFollowSubmit" id="removeFollowSubmit" value="Unfollow" />
 			</form>
 		</div>
 		<!--{{#each followActivity}}
