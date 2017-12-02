@@ -59,20 +59,31 @@ Array.prototype.swapOut = function(str) {
 };
 
 Template.editGallery.events({
-  //'click .goto-upload'(event) {
-  //  event.preventDefault();
-  //  console.log(event);
-  //  alert("upload button clicked.  Will add modal later.");
-  //  //$('#upload-box').dialog('show');
-  //}
+  'submit #edit_gallery_form'(event) {
+    event.preventDefault();
+    console.log(event);
+    var newName = Template.instance().find('#editGalName').value;
+    if (newName.trim() === "") {
+      alert("The name cannot be blank.");
+      throw new Meteor.Error("empty name");
+    }
+    console.log(newName);
+    var gallery = Template.parentData(0);
+    Galleries.update({_id: gallery._id}, {
+      $set: {
+        name: newName,
+        description: Template.instance().find('#editGalDesc').value,
+        open: Template.instance().find('#makeOpen').checked,
+      }
+    });
+    alert("The gallery has been updated. Go back to your portfolio to see the changes.");
+  },
   'change .featuredCheck'(event) {
     event.preventDefault();
     var gallery = Template.parentData(0);
     console.log(event);
-    //console.log(gallery.regImages);
     var newFeatured = gallery.featured.swapOut(event.target.value);
     var newRegular = gallery.regImages.swapOut(event.target.value);
-    //console.log(newRegular);
     Galleries.update({_id: gallery._id}, {
       $set: {
         featured: newFeatured,
@@ -85,7 +96,6 @@ Template.editGallery.events({
     var gallery = Template.parentData(0);
     var imgId = event.target.id;
     console.log(event);
-    console.log("imgId: " + imgId);
     if (gallery.featured.includes(imgId)) {
       var newFeatured = gallery.featured;
       newFeatured.splice(newFeatured.indexOf(imgId), 1);
@@ -106,7 +116,6 @@ Template.editGallery.events({
     }
     else {
       var newRegular2 = gallery.regImages;
-      //console.log("regImages: " + gallery.regImages);
       newRegular2.push(imgId);
       Galleries.update({_id: gallery._id}, {
         $set: {
