@@ -4,7 +4,7 @@ import {ReactiveDict} from 'meteor/reactive-dict';
 import {Router} from 'meteor/iron:router';
 
 import { Galleries } from '../../api/galleries.js';
-import { Uploads } from '../../api/uploads.js';  // for testingn only; remove later
+//import { Uploads } from '../../api/uploads.js';  // for testingn only; remove later
 
 import './feedbody.html';
 import '../components/gallery-in-feed.js';
@@ -33,9 +33,6 @@ Template.feedbody.onCreated(function bodyOnCreated() {
 //
 
 Template.feedbody.helpers({
-  uploads: function() {
-    return Uploads.find();
-  },  // this is temporary, only for testing.
   galleries: function() {
     return Galleries.find();
     //TODO: filter by subscriptions

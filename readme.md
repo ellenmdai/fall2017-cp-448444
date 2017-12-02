@@ -36,6 +36,7 @@ table css: uploads, galleries, selecting featured.
 if time: for adding and removing images from gallery, allow re-adding of submitted images
 scrollable tables
 temporary states in editGallery
+allow viewing of anyone's portfolio, not just your own.
 	
 FIRST THINGS FIRST: 
 	

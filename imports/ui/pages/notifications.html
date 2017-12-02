@@ -1,0 +1,39 @@
+<template name="notifications">
+	{{> headerTemplate}}
+	<div class="main">
+		<h1>Activity</h1><br>
+		<button id='following' value='following'>Manage follows</button><br>
+		<div id='follow_select_div'>
+			<form id="addFollow" method="post" enctype="multipart/form-data">
+				Select a user to follow: <select name="addSelector" id="addSelector">
+					<!--{{#each usersUploads}}
+						<option value="{{this._id}}">{{this.name}}</option>
+					{{/each}}-->
+					<option value="placeholder">placeholder</option>
+				</select><br>
+				<input type="submit" name="addFollowSubmit" id="addFollowSubmit" />
+			</form>
+			<form id="removeFollow" method="post" enctype="multipart/form-data">
+				Select a user to unfollow: <select name="removeSelector" id="removeSelector">
+					<!--{{#each usersUploads}}
+						<option value="{{this._id}}">{{this.name}}</option>
+					{{/each}}-->
+					<option value="placeholder2">placeholder2</option>
+				</select><br>
+				<input type="submit" name="removeFollowSubmit" id="removeFollowSubmit" />
+			</form>
+		</div>
+		<!--{{#each followActivity}}
+			{{> activity}}
+			<hr>
+		{{/each}}
+		<br><hr><br>-->
+		<h1>Submission Requests</h1>
+			<!--TODO-->
+		<br><hr><br>
+	</div>
+</template>
+
+<template name="activity">
+	ACTIVITY TEMPLATE
+</template>

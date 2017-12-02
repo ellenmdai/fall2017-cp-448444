@@ -44,5 +44,10 @@ Template.headerTemplate.events({
     event.preventDefault();
     console.log(event);
     Router.go('home');
+  },
+  'click .notifications'(event) {
+    event.preventDefault();
+    console.log(event);
+    Router.go('/notifications/' + Meteor.userId());
   }
 });

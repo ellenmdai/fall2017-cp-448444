@@ -15,19 +15,6 @@
         {{> gallery_in_feed}}
         <hr>
       {{/each}}
-      END GALLERIES START UPLOADS<br>
-        <div class="imageView">
-          {{#each uploads}}
-            <div>
-              <a href="{{url}}" target="_blank">
-                <img src="{{url store='imageStore' }}" alt="image not loading" class="placeholderclass" />
-              </a>
-              Owner: {{owner}} <br>
-              Caption: {{caption}} <br>
-            </div>
-          {{/each}}
-        </div>
-      {{> uploads_grid}}  
     </div>
   </div>
 </template>
