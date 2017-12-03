@@ -9,7 +9,6 @@
 					{{#each notFollowing}}
 						<option value="{{_id}}">{{username}}</option>
 					{{/each}}
-					<option value="placeholder">placeholder</option>
 				</select><br>
 				<input type="submit" name="addFollowSubmit" id="addFollowSubmit" value="Follow" />
 			</form>
@@ -18,7 +17,6 @@
 					{{#each following}}
 						<option value="{{_id}}">{{username}}</option>
 					{{/each}}
-					<option value="placeholder2">placeholder2</option>
 				</select><br>
 				<input type="submit" name="removeFollowSubmit" id="removeFollowSubmit" value="Unfollow" />
 			</form>
@@ -30,6 +28,9 @@
 		<br><hr><br>-->
 		<h1>Submission Requests</h1>
 			<!--TODO-->
+			{{#each requests}}
+				{{> submitRequest}}
+			{{/each}}
 		<br><hr><br>
 	</div>
 </template>

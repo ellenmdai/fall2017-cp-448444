@@ -2,11 +2,13 @@
 import { Meteor } from 'meteor/meteor';
 import { Router } from 'meteor/iron:router';
 import { Galleries } from '../imports/api/galleries.js';
+import { SubmitRequests } from '../imports/api/galleries.js';
 import '../imports/startup/accounts-config.js';
 import '../imports/ui/pages/feedbody.js';
 import '../imports/ui/pages/portfolio.js';
 import '../imports/ui/pages/editGallery.js';
 import '../imports/ui/pages/notifications.js';
+import '../imports/ui/pages/submitForm.js';
 
 /*Router code learned from http://meteortips.com/second-meteor-tutorial/iron-router-part-1/
 and http://iron-meteor.github.io/iron-router/*/
@@ -33,6 +35,13 @@ Router.route('/editGallery/:_galId', {
 			}
 		});
 	}
+});
+Router.route('/submitForm/:_galId', function() {
+	this.render('submitForm', {
+		data: function() {
+			return Galleries.findOne({_id: this.params._galId});
+		}
+	});
 });
 Router.route('/notifications/:_usrId', function() {
 	if (!Meteor.userId()) {

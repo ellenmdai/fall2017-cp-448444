@@ -37,6 +37,7 @@ if time: for adding and removing images from gallery, allow re-adding of submitt
 scrollable tables
 temporary states in editGallery
 allow viewing of anyone's portfolio, not just your own.
+have things show up in activity
 	
 FIRST THINGS FIRST: get follow selector to add data to accounts,
 then get feedbody to respond the the follow only checkbox
@@ -45,7 +46,7 @@ then get feedbody to respond the the follow only checkbox
 Showalluseruploads runs twice on initial (first time returns nothing),
 	4 times on upload, once on delete
 Router.go doesn't show queries because they are run before the new page is loaded
-	
+Could not for the life of me figure out how to update user profiles in the user db, so made a new collection for follows.	
 	
 DONE:
 	ALSO: files not saved after server is stopped?

@@ -1,0 +1,15 @@
+<template name="submitForm">
+	<div name='main'>
+		<h2>Send a request to {{name}}</h2>
+		<form id="new_submit_form" method="post" enctype="multipart/form-data">
+			Select image:<br><select name="imageSelector" id="imageSelector" size='10'>
+				{{#each usersUploads}}
+					<option value="{{this._id}}">{{this.name}}</option>
+				{{/each}}
+			</select><br>
+			<textarea name='msg' id='msg' rows='5' cols='50' placeholder='message'></textarea><br>
+			<input type="submit" value="Create" name="newGal" id="newGal" />
+		</form>
+		<button type='button' id='goHome'>Home</button>
+	</div>
+</template>

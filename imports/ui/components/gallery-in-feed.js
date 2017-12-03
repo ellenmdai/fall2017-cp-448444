@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { Uploads } from '../../api/uploads.js';
 //import { Galleries } from '../../api/galleries.js';
+import { SubmitRequests } from '../../api/submitrequests.js';
 import { Router } from 'meteor/iron:router';
 import './gallery-in-feed.html';
 //import './gallery-grid.js';
@@ -91,11 +92,16 @@ Template.gallery_in_feed.helpers({
 });
 
 Template.gallery_in_feed.events({
-  //TODO: edit button handler
 	'click .editGallery'(event) {
 		event.preventDefault();
 		console.log(event);
 		console.log(event.target.value);
 		Router.go('/editGallery/' + event.target.value);
+	},
+	'click .submitAnImg'(event) {
+		event.preventDefault();
+		console.log(event);
+		console.log(event.target.value);
+		Router.go('/submitForm/' + event.target.value);
 	}
 });

@@ -3,15 +3,18 @@ import { Template } from 'meteor/templating';
 import {ReactiveDict} from 'meteor/reactive-dict';
 
 import { Galleries } from '../../api/galleries.js';
-import { Uploads } from '../../api/uploads.js';  // for testingn only; remove later
+import { Uploads } from '../../api/uploads.js';
+import { SubmitRequests } from '../../api/uploads.js';
 
 import './notifications.html';
 import '../components/header.js';
+import '../components/submitRequestUI.js';
 
 Template.notifications.onCreated(function bodyOnCreated() {
   this.state = new ReactiveDict();
   Meteor.subscribe('uploads');
   Meteor.subscribe('galleries');
+	Meteor.subscribe('submitRequests');
 });
 
 Template.notifications.helpers({
@@ -33,49 +36,32 @@ Template.notifications.helpers({
 			return Meteor.users.find({ $and: [{_id: { $not: { $in: folIds2 } } }, {_id: { $not: Meteor.userId() }}] });
 		}
 		return Meteor.users.find();
+	},
+	requests: function() {
+		return SubmitRequests.find({to: Meteor.userId()});
 	}
 });
 
 Template.notifications.events({
-  'click #new_gallery_btn'(event) {
-    event.preventDefault();
-    console.log(event);
-    alert("new gallery button clicked.  Will add modal later.");
-  },
-  'submit #new_gallery_form'(event) {
-    event.preventDefault();
-    var galName = document.getElementById('newGalName').value;
-    if (galName === null || galName.trim() === "") {
-      alert("You must give your gallery a name.");
-      throw new Meteor.Error('empty-name');
-    }
-    var descriptionInput = document.getElementById('newGalDesc').value;
-    var selectedImages = $('#imageSelector').val(); // array of image ids
-    var isOpen = document.getElementById('makeOpen').checked;
-    //check(text, String);
- 
-    // Make sure the user is logged in before inserting a task
-    if (! Meteor.userId()) {
-      alert("You are not logged in. Cannot create gallery");
-      throw new Meteor.Error('not-authorized');
-    }
-    console.log(selectedImages);
-    console.log(galName);
-    console.log(descriptionInput);
-    Galleries.insert({
-      name: galName,
-      description: descriptionInput,
-      regImages: selectedImages,
-      featured: [],
-      open: isOpen,
-      createdAt: new Date(),
-      owner: Meteor.userId(),
-      username: Meteor.user().username,
-    });
-    // clear form?
-    document.getElementById('newGalName').value = "";
-    document.getElementById('newGalDesc').value = "";
-    // reset select box somehow
-    	alert("Created " + galName);
-  }  
+  'submit #addFollow'(event) {
+		event.preventDefault();
+		console.log(event);
+		console.log(Meteor.user().profile);
+		var addSelector = Template.instance().find('#addSelector');
+		var newFollowArray = Meteor.user().following;
+		console.log(newFollowArray);
+		if (newFollowArray === undefined) {
+			newFollowArray = [];
+		}
+		else {
+			newFollowArray.push(addSelector.options[addSelector.selectedIndex].value);
+		}
+		console.log(newFollowArray);
+		Meteor.users.update({_id: Meteor.userId()}, {
+			$set: {
+				"following": newFollowArray
+			}
+		});
+		alert("You are now following someone new.");
+	}, 
 });

@@ -3,7 +3,9 @@
 	<h2>{{name}}</h2> by {{username}}<br>
 	
 	{{#if isOwner}}
-	  <button type="button" class="editGallery" value="{{_id}}">Edit</button><br>
+		<button type="button" class="editGallery" value="{{_id}}">Edit</button><br>
+	{{else}}
+		<button type="button" class="submitAnImg" value="{{_id}}">Submit an image</button><br>
 	{{/if}}
 	{{description}}<br>
 	<!--<strong>Featured: </strong><br>
