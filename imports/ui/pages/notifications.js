@@ -23,9 +23,6 @@ Template.notifications.helpers({
 		var folIds = Meteor.user().following;
 		console.log(folIds);
 		if (folIds !== undefined) {
-			//for (var i = 0; i < folIds.length; i++) {
-			//	folArray.push(Meteor.users.find( { _id: folIds[i] } ));
-			//}
 			return Meteor.users.find({_id: { $in: folIds }});
 		}
 		return [];

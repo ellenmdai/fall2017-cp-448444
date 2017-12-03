@@ -11,6 +11,7 @@ import '../imports/api/uploads.js';
 import '../imports/api/galleries.js';
 import '../imports/api/follows.js';
 import '../imports/api/submitrequests.js';
+import '../imports/api/activities.js';
 //import '../imports/ui/components/uploads-grid.js';
 
 Meteor.users.allow({
@@ -24,7 +25,7 @@ Meteor.users.allow({
 	   */
 	}
 });
-
+//https://stackoverflow.com/questions/19391308/custom-fields-on-meteor-users-not-being-published
 Meteor.publish('userData', function() {
   if(!this.userId) return null;
   return Meteor.users.find(this.userId, {fields: {

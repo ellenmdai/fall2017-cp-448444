@@ -14,36 +14,23 @@ import '../components/header.js';
 Template.feedbody.onCreated(function bodyOnCreated() {
   this.state = new ReactiveDict();
   Meteor.subscribe('uploads');
+  Meteor.subscribe('userData');
 });
 
-//Template.body.helpers({
-//  tasks() {
-//    const instance = Template.instance();
-//    if (instance.state.get('hideCompleted')) {
-//      // If hide completed is checked, filter tasks
-//      return Tasks.find({checked:{$ne:true}}, {sort:{createdAt:-1}});
-//    }
-//    // Otherwise, return all of the tasks
-//    return Tasks.find({}, {sort: {createdAt:-1}});
-//  },
-//  incompleteCount() {
-//    return Tasks.find({ checked: { $ne: true } }).count();
-//  },
-//});
-//
 
 Template.feedbody.helpers({
   galleries: function() {
+    const instance = Template.instance();
+    if (instance.state.get('show-following-only')) {
+      var following = Meteor.user().following;
+      return Galleries.find({owner: { $in: following } });
+    }
     return Galleries.find();
-    //TODO: filter by subscriptions
   }
 });
 
 Template.feedbody.events({
-  'click .goto-upload'(event) {
-    event.preventDefault();
-    console.log(event);
-    alert("upload button clicked.  Will add modal later.");
-    //$('#upload-box').dialog('show');
+  'change #show-following-only'(event, instance) {
+    instance.state.set('show-following-only', event.target.checked);
   }
 });
