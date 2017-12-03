@@ -7,7 +7,7 @@ export const SubmitRequests = new Mongo.Collection('submitrequests');
 
 if (Meteor.isServer) {
   Meteor.publish('submitrequests', function() {
-    return Follows.find();
+    return SubmitRequests.find();
   });
 }
 

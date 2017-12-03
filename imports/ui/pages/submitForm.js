@@ -29,7 +29,7 @@ Template.submitForm.helpers({
 });
 
 Template.submitForm.events({
-  'submit #new_request_form'(event) {
+  'submit #new_submit_form'(event) {
 	event.preventDefault();
 	console.log(event);
 	var galleryId = Template.parentData(0)._id;
@@ -37,7 +37,7 @@ Template.submitForm.events({
 	var selector = Template.instance().find('#imageSelector');
 	var selectedImageId = selector.options[selector.selectedIndex].value;
 	var galOwnerId = Galleries.find({_id: galleryId}).owner;
-	var msg = Template.instance.find('#msg').value;
+	var msg = Template.instance().find('#msg').value;
 	SubmitRequests.insert({
       from: Meteor.userId(),
       to: galOwnerId,
