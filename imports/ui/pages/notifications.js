@@ -4,7 +4,7 @@ import {ReactiveDict} from 'meteor/reactive-dict';
 
 import { Galleries } from '../../api/galleries.js';
 import { Uploads } from '../../api/uploads.js';
-import { SubmitRequests } from '../../api/uploads.js';
+import { SubmitRequests } from '../../api/submitrequests.js';
 
 import './notifications.html';
 import '../components/header.js';
@@ -14,7 +14,7 @@ Template.notifications.onCreated(function bodyOnCreated() {
   this.state = new ReactiveDict();
   Meteor.subscribe('uploads');
   Meteor.subscribe('galleries');
-	Meteor.subscribe('submitRequests');
+	Meteor.subscribe('submitrequests');
 });
 
 Template.notifications.helpers({

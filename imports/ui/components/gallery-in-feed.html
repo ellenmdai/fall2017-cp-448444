@@ -5,7 +5,9 @@
 	{{#if isOwner}}
 		<button type="button" class="editGallery" value="{{_id}}">Edit</button><br>
 	{{else}}
-		<button type="button" class="submitAnImg" value="{{_id}}">Submit an image</button><br>
+		{{#if currentUser}}
+			<button type="button" class="submitAnImg" value="{{_id}}">Submit an image</button><br>
+		{{/if}}
 	{{/if}}
 	{{description}}<br>
 	<!--<strong>Featured: </strong><br>

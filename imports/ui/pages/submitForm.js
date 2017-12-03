@@ -36,7 +36,8 @@ Template.submitForm.events({
 	console.log(galleryId);
 	var selector = Template.instance().find('#imageSelector');
 	var selectedImageId = selector.options[selector.selectedIndex].value;
-	var galOwnerId = Galleries.find({_id: galleryId}).owner;
+	var galOwnerId = Template.parentData(0).owner;
+	console.log(galOwnerId);
 	var msg = Template.instance().find('#msg').value;
 	SubmitRequests.insert({
       from: Meteor.userId(),
@@ -46,7 +47,8 @@ Template.submitForm.events({
       message: msg
     });
 	alert("Your submission has been sent. If the gallery's owner approves it, it will be added to the collection.");
-  },
+  Router.go('home');
+	},
   'click #goHome'(event) {
 	event.preventDefault();
 	console.log(event);
