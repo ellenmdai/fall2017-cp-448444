@@ -9,6 +9,7 @@ import '../imports/ui/pages/portfolio.js';
 import '../imports/ui/pages/editGallery.js';
 import '../imports/ui/pages/notifications.js';
 import '../imports/ui/pages/submitForm.js';
+import '../imports/ui/pages/uploadForm.js';
 
 /*Router code learned from http://meteortips.com/second-meteor-tutorial/iron-router-part-1/
 and http://iron-meteor.github.io/iron-router/*/
@@ -23,6 +24,13 @@ Router.route('/portfolio', function() {
 		this.redirect('home');
 	}
 	this.render('portfolio');
+});
+Router.route('/uploadForm', function() {
+	if (!Meteor.userId()) {
+		alert("Please log in to upload images.");
+		this.redirect('home');
+	}
+	this.render('uploadForm');
 });
 Router.route('/editGallery/:_galId', {
 	waitOn: function() {

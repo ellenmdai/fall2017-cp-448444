@@ -23,21 +23,19 @@ TODO:
 initiate the upload in uploads.js-- event????
 get image to display on page, not just on click
 css
-get upload_box to actually be a modal box
 uploads-grid helper firing multiple times?
 router.go() doing database querying before new page loads...
 dialog boxes, can use jquery?
 filter galleries by subscription, using instance states (see feedbody)
 hyperlink username in feed_in_gallery to their page.
-check that featured and not featured show up in same grid.
 Allow multi-pic uploads if time
-if time, do iron router layout and configure and stuff.
 table css: uploads, galleries, selecting featured.
-if time: for adding and removing images from gallery, allow re-adding of submitted images
 scrollable tables
 temporary states in editGallery
 allow viewing of anyone's portfolio, not just your own.
 have things show up in activity
+allow users to choose galleries to add the image to upon first uploading
+make creating a gallery its own page.
 	
 FIRST THINGS FIRST: get follow selector to add data to accounts,
 then get feedbody to respond the the follow only checkbox
@@ -47,6 +45,7 @@ Showalluseruploads runs twice on initial (first time returns nothing),
 	4 times on upload, once on delete
 Router.go doesn't show queries because they are run before the new page is loaded
 Could not for the life of me figure out how to update user profiles in the user db, so made a new collection for follows.	
+possible source of img display issues: The provided value 'undefined' is not a valid enum value of type XMLHttpRequestResponseType.
 	
 DONE:
 	ALSO: files not saved after server is stopped?

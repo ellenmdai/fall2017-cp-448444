@@ -6,7 +6,9 @@
 		<button type="button" class="editGallery" value="{{_id}}">Edit</button><br>
 	{{else}}
 		{{#if currentUser}}
-			<button type="button" class="submitAnImg" value="{{_id}}">Submit an image</button><br>
+			{{#if open}}
+				<button type="button" class="submitAnImg" value="{{_id}}">Submit an image</button><br>
+			{{/if}}
 		{{/if}}
 	{{/if}}
 	{{description}}<br>

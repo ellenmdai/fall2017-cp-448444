@@ -2,16 +2,17 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import {Dropzone} from 'meteor/raix:ui-dropped-event';
 import { Uploads } from '../../api/uploads.js';
-import './upload-box.html';
+import './uploadForm.html';
+import '../components/header.js';
  
-Template.upload_box.helpers({
+Template.uploadForm.helpers({
 //  isOwner() {
 //    return this.owner === Meteor.userId();
 //  },
 });
 
-Template.upload_box.events({
-	'submit #upload-form'(event) {
+Template.uploadForm.events({
+	'submit #upload_form'(event) {
     // Prevent default browser form submit
 	//TODO: check inputs
     event.preventDefault();
