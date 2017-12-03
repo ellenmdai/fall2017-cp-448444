@@ -15,6 +15,7 @@ Template.notifications.onCreated(function bodyOnCreated() {
   Meteor.subscribe('uploads');
   Meteor.subscribe('galleries');
 	Meteor.subscribe('submitrequests');
+	Meteor.subscribe('userData');
 });
 
 Template.notifications.helpers({
@@ -37,6 +38,10 @@ Template.notifications.helpers({
 		}
 		return Meteor.users.find();
 	},
+	followActivity: function() {
+		var followArray = Meteor.user().following;
+		return followArray;
+	},
 	requests: function() {
 		return SubmitRequests.find({to: Meteor.userId()});
 	}
@@ -46,16 +51,14 @@ Template.notifications.events({
   'submit #addFollow'(event) {
 		event.preventDefault();
 		console.log(event);
-		console.log(Meteor.user().profile);
+		console.log(Meteor.user());
 		var addSelector = Template.instance().find('#addSelector');
 		var newFollowArray = Meteor.user().following;
 		console.log(newFollowArray);
 		if (newFollowArray === undefined) {
 			newFollowArray = [];
 		}
-		else {
-			newFollowArray.push(addSelector.options[addSelector.selectedIndex].value);
-		}
+		newFollowArray.push(addSelector.options[addSelector.selectedIndex].value);
 		console.log(newFollowArray);
 		Meteor.users.update({_id: Meteor.userId()}, {
 			$set: {

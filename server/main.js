@@ -25,12 +25,9 @@ Meteor.users.allow({
 	}
 });
 
-Meteor.publish('userData', function () {
-  if (this.userId) {
-    return Meteor.users.find({ _id: this.userId }, {
-      fields: { following: 1}
-    });
-  } else {
-    this.ready();
-  }
+Meteor.publish('userData', function() {
+  if(!this.userId) return null;
+  return Meteor.users.find(this.userId, {fields: {
+    following: 1,
+  }});
 });
