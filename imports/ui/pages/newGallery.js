@@ -9,6 +9,7 @@ import { Activities } from '../../api/activities.js';
 
 import './newGallery.html';
 import '../components/header.js';
+import '../components/uploadsSelector.js';
 
 Template.newGallery.onCreated(function bodyOnCreated() {
   this.state = new ReactiveDict();
@@ -40,19 +41,19 @@ Template.newGallery.events({
       throw new Meteor.Error('empty-name');
     }
     var descriptionInput = document.getElementById('newGalDesc').value;
-    var selectedImages = $('#imageSelector').val(); // array of image ids
-    if (selectedImages === null) {
-      selectedImages = [];
-    }
+    //https://stackoverflow.com/questions/19766044/best-way-to-get-all-selected-checkboxes-values-in-jquery
+    var selectedImages = $('.selected:checked').map(function() {
+      return this.value;
+    }).get();
     var isOpen = document.getElementById('makeOpen').checked;
     //check(text, String);
- 
+
     // Make sure the user is logged in before inserting a task
     if (! Meteor.userId()) {
       alert("You are not logged in. Cannot create gallery");
       throw new Meteor.Error('not-authorized');
     }
-    //console.log(selectedImages);
+    console.log(selectedImages);
     //console.log(galName);
     //console.log(descriptionInput);
     Galleries.insert({

@@ -1,0 +1,16 @@
+<template name="uploadsSelector">
+	<div class="uploadsSelector">
+		{{#each uploads}}
+			{{> imgBoxC}}
+		{{/each}}
+	</div>
+</template>
+
+<template name="imgBoxC">
+	<div class="imgBoxC">
+		<input type="checkbox" class="selected" value="{{_id}}"/>
+		<a href="{{this.url store='images'}}" target="_blank"><img src="{{this.url store='thumbs'}}" alt="{{this.name}}" class="thumbnail" /></a><br>
+		{{this.name}}<br>
+		Caption: {{this.caption}}<br>
+	</div>
+</template>
