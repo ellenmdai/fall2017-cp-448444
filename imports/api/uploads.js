@@ -17,6 +17,7 @@ var imageStore = new FS.Store.GridFS("images", {
 
 export const Uploads = new FS.Collection('uploads', {
 	stores: [
+		//https://github.com/numtel/meteor-cfs-image-resize
 		new FS.Store.GridFS("thumbs", {
       beforeWrite: function(fileObj) {
         // We return an object, which will change the

@@ -19,18 +19,18 @@
           <td>
             {{#each featured}}
               <input type="checkbox" class="featuredCheck" value="{{_id}}" checked/>
-							<img src="{{this.url store='imageStore'}}" alt="can't display {{name}}" class="thumbnail" id="{{_id}}" /><br>
+							<img src="{{this.url store='thumbs'}}" alt="can't display {{name}}" class="thumbnail" id="{{_id}}" /><br>
             {{/each}}
           </td>
           <td>
             {{#each regular}}
               <input type="checkbox" class="featuredCheck" value="{{_id}}"/>
-							<img src="{{this.url store='imageStore'}}" alt="can't display {{name}}" class="thumbnail" id="{{_id}}" /><br>
+							<img src="{{this.url store='thumbs'}}" alt="can't display {{name}}" class="thumbnail" id="{{_id}}" /><br>
             {{/each}}
           </td>
 					<td>
 						{{#each notIn}}
-							<img src="{{this.url store='imageStore'}}" alt="can't display {{name}}" class="thumbnail" id="{{_id}}" /><br><br>
+							<img src="{{this.url store='thumbs'}}" alt="can't display {{name}}" class="thumbnail" id="{{_id}}" /><br><br>
 						{{/each}}
 					</td>
         </tr></tbody> 
