@@ -1,9 +1,7 @@
 <template name="uploads_grid">
 	<div class="uploads_grid">
-		uploads_grid placeholder text
-		<div id="ug_header">
-			<span id="ug_title">Things that have been uploaded</span>
-		</div>
+		<h2>Your Uploads</h2>
+		<button type='button' id='goto-upload'>Upload new images</button><br><br>
 		{{#each uploads}}
 			{{> imgBox}}
 		{{/each}}
@@ -15,9 +13,9 @@
 	</div>
 </template>
 
-<template name="imgBox">
-	<div class="imgBox">
-		<a href="{{this.url}}" target="_blank"><img src="{{this.url store='images'}}" alt="{{this.name}}" class="thumbnail" /></a><br>
+<template name="imgBoxU">
+	<div class="imgBoxU">
+		<a href="{{this.url store='images'}}" target="_blank"><img src="{{this.url store='images'}}" alt="{{this.name}}" class="thumbnail" /></a><br>
 		{{this.name}}<br>
 		Caption: {{this.caption}}<br>
 		<button type='button' class='edit_button' value={{this._id}}>Edit</button>

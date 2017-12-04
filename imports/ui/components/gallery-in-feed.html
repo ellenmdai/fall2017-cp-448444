@@ -12,18 +12,33 @@
 		{{/if}}
 	{{/if}}
 	{{description}}<br>
-	<!--<strong>Featured: </strong><br>
-		{{featured}}
-		{{> gallery_grid imgIds=featured isFeatured=true galleryId=_id}}
-	<strong>Other: </strong><br>
-		{{regImages}}
-		{{> gallery_grid imgIds=regImages isFeatured=false galleryId=_id}}-->
-	<div class="gallery_grid">
-		<table class="gg_grid">
-			<tbody class='gg_grid_body' id='gg_grid_body'>
-				{{loadImages}}
-			</tbody> 
-		</table>
+	<div class='featured'>
+		<strong>Featured: </strong><br>
+		{{#each getFeatured}}
+			{{> imgBoxF}}
+		{{/each}}
+	</div>
+	<div class='regular'>
+		<strong>Other: </strong><br>
+		{{#each getRegImages}}
+			{{> imgBox}}
+		{{/each}}
 	</div>
 </div>
+</template>
+
+<template name="imgBox">
+	<div class="imgBox">
+		<a href="{{this.url store='images'}}" target="_blank"><img src="{{this.url store='images'}}" alt="{{this.name}}" class="thumbnail" /></a><br>
+		{{this.name}}<br>
+		Caption: {{this.caption}}<br>
+	</div>
+</template>
+
+<template name="imgBoxF">
+	<div class="imgBoxF">
+		<a href="{{this.url store='images'}}" target="_blank"><img src="{{this.url store='images'}}" alt="{{this.name}}" class="thumbnail" /></a><br>
+		{{this.name}}<br>
+		Caption: {{this.caption}}<br>
+	</div>
 </template>
