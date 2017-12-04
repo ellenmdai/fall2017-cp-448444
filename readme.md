@@ -21,16 +21,13 @@ meteor add pahans:reactive-modal
 
 TODO:
 initiate the upload in uploads.js-- event????
-get image to display on page, not just on click
 css
-uploads-grid helper firing multiple times?
-router.go() doing database querying before new page loads...
 table css: uploads, galleries, selecting featured.
 scrollable tables
 allow users to choose galleries to add the image to upon first uploading
-delete uploads
+show img thumbnails in edit page
 	
-FIRST THINGS FIRST: get follow selector to add data to accounts,
+FIRST THINGS FIRST:
 	
 	
 Showalluseruploads runs twice on initial (first time returns nothing),
