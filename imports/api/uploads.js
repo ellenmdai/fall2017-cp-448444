@@ -15,14 +15,24 @@ var imageStore = new FS.Store.GridFS("images", {
   //                      // Default: 2MB. Reasonable range: 512KB - 4MB
 });
 
-var createThumb = function(fileObj, readStream, writeStream) {
-  // Transform the image into a 10x10px thumbnail
-  gm(readStream, fileObj.name()).resize('50', '50').stream().pipe(writeStream);
-};
-
 export const Uploads = new FS.Collection('uploads', {
 	stores: [
-		new FS.Store.GridFS('thumbs', {transformWrite: createThumb}),
+		new FS.Store.GridFS("thumbs", {
+      beforeWrite: function(fileObj) {
+        // We return an object, which will change the
+        // filename extension and type for this store only.
+        return {
+          extension: 'jpeg',
+          type: 'image/jpeg'
+        };
+      },
+      transformWrite: resizeImageStream({
+        width: 240,
+        height: 180,
+        format: 'image/jpeg',
+        quality: 50
+      })
+    }),
 		imageStore
 	],
 	filter: {

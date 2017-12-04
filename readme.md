@@ -6,6 +6,7 @@ WHEN READY FOR SECURITY: meteor remove insecure
 WHEN READY FOR PRIVACY:  meteor remove autopublish
 FOR TESTING????: meteor add practicalmeteor:mocha
 for thumbnails: meteor add cfs:graphicsmagick
+meteor add numtel:cfs-image-resize
 for routing: meteor add kadira:flow-router
 meteor add iron:router -- done
 meteor add jquery -- done
