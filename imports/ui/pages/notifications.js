@@ -5,17 +5,19 @@ import {ReactiveDict} from 'meteor/reactive-dict';
 import { Galleries } from '../../api/galleries.js';
 import { Uploads } from '../../api/uploads.js';
 import { SubmitRequests } from '../../api/submitrequests.js';
+import { Activities } from '../../api/activities.js';
 
 import './notifications.html';
 import '../components/header.js';
 import '../components/submitRequestUI.js';
 
-Template.notifications.onCreated(function bodyOnCreated() {
+Template.notifications.onCreated(function() {
   this.state = new ReactiveDict();
   Meteor.subscribe('uploads');
   Meteor.subscribe('galleries');
 	Meteor.subscribe('submitrequests');
 	Meteor.subscribe('userData');
+	Meteor.subscribe('activities');
 });
 
 Template.notifications.helpers({
@@ -36,8 +38,7 @@ Template.notifications.helpers({
 		return Meteor.users.find();
 	},
 	followActivity: function() {
-		var followArray = Meteor.user().following;
-		return followArray;
+		return Activities.find({reciever: Meteor.userId()});
 	},
 	requests: function() {
 		return SubmitRequests.find({to: Meteor.userId()});
@@ -64,4 +65,24 @@ Template.notifications.events({
 		});
 		alert("You are now following someone new.");
 	}, 
+});
+
+//ACTIVITIES TEMPLATE
+
+Template.activity.onCreated(function() {
+	Meteor.subscribe('activities');
+});
+
+Template.activity.helpers({
+	newGallery: function() {
+		return (this.type === "new gallery");
+	}
+});
+
+Template.activity.events({
+	'click #markRead'(event) {
+		event.preventDefault();
+		console.log(event);
+		Activities.remove(this._id);
+	}
 });

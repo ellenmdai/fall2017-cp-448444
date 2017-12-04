@@ -28,7 +28,7 @@ Meteor.users.allow({
 //https://stackoverflow.com/questions/19391308/custom-fields-on-meteor-users-not-being-published
 Meteor.publish('userData', function() {
   if(!this.userId) return null;
-  return Meteor.users.find(this.userId, {fields: {
+  return Meteor.users.find({}, {fields: {
     following: 1,
   }});
 });

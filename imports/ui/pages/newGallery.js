@@ -5,6 +5,7 @@ import {Router} from 'meteor/iron:router';
 
 import { Galleries } from '../../api/galleries.js';
 import { Uploads } from '../../api/uploads.js';
+import { Activities } from '../../api/activities.js';
 
 import './newGallery.html';
 import '../components/header.js';
@@ -13,6 +14,7 @@ Template.newGallery.onCreated(function bodyOnCreated() {
   this.state = new ReactiveDict();
   Meteor.subscribe('galleries');
   Meteor.subscribe('uploads');
+  Meteor.subscribe('userData');
   //TODO: figure out how to access data context for below
   //this.state.set('tmpFeatured', this.featured);
   //this.state.set('tmpRegular', this.regImages);
@@ -47,9 +49,9 @@ Template.newGallery.events({
       alert("You are not logged in. Cannot create gallery");
       throw new Meteor.Error('not-authorized');
     }
-    console.log(selectedImages);
-    console.log(galName);
-    console.log(descriptionInput);
+    //console.log(selectedImages);
+    //console.log(galName);
+    //console.log(descriptionInput);
     Galleries.insert({
       name: galName,
       description: descriptionInput,
@@ -60,12 +62,26 @@ Template.newGallery.events({
       owner: Meteor.userId(),
       username: Meteor.user().username,
     });
-    //TODO: create an activity alert
-    
+    var followers = [];
+    Meteor.users.find().forEach(function(usr) {
+      if (usr.following !== undefined && usr.following.includes(Meteor.userId())) {
+        followers.push(usr._id);
+      }
+    });
+    console.log(followers);
+    for (var i = 0; i < followers.length; i++) {
+      Activities.insert({
+        reciever: followers[i],
+        type: "new gallery",
+        galleryName: galName,
+        open: isOpen,
+        sender: Meteor.userId(),
+        senderUsername: Meteor.user().username
+      });
+    }
     // clear form?
     document.getElementById('newGalName').value = "";
     document.getElementById('newGalDesc').value = "";
-    // reset select box somehow
     alert("Created " + galName);
     Router.go('/portfolio');
   }  

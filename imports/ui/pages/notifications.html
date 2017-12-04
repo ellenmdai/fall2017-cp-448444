@@ -20,7 +20,7 @@
 				</select><br>
 				<input type="submit" name="removeFollowSubmit" id="removeFollowSubmit" value="Unfollow" />
 			</form>
-		</div>
+		</div><br>
 		{{#each followActivity}}
 			{{> activity}}
 			<hr>
@@ -36,5 +36,11 @@
 </template>
 
 <template name="activity">
-	ACTIVITY TEMPLATE
+	{{#if newGallery}}
+		{{senderUsername}} just created a new gallery named <strong>{{galleryName}}</strong>!<br>
+		{{#if open}}
+			It's open for submission too, so go check it out and send in your own work!<br>
+		{{/if}}
+	{{/if}}
+	<button type='button' id='markRead'>Mark as read</button>
 </template>
