@@ -1,8 +1,9 @@
 //import '../imports/startup/client';
 import { Meteor } from 'meteor/meteor';
 import { Router } from 'meteor/iron:router';
+import { Uploads } from '../imports/api/uploads.js';
 import { Galleries } from '../imports/api/galleries.js';
-import { SubmitRequests } from '../imports/api/galleries.js';
+import { SubmitRequests } from '../imports/api/submitrequests.js';
 import '../imports/startup/accounts-config.js';
 import '../imports/ui/pages/feedbody.js';
 import '../imports/ui/pages/portfolio.js';
@@ -11,6 +12,7 @@ import '../imports/ui/pages/notifications.js';
 import '../imports/ui/pages/submitForm.js';
 import '../imports/ui/pages/uploadForm.js';
 import '../imports/ui/pages/newGallery.js';
+import '../imports/ui/pages/editImage.js';
 
 /*Router code learned from http://meteortips.com/second-meteor-tutorial/iron-router-part-1/
 and http://iron-meteor.github.io/iron-router/*/
@@ -32,6 +34,22 @@ Router.route('/uploadForm', function() {
 		this.redirect('home');
 	}
 	this.render('uploadForm');
+});
+Router.route('/editImage/:_imgId', {
+	waitOn: function() {
+		Meteor.subscribe('uploads', this.params._imgId);
+	},
+	action: function() {
+		if(!Meteor.userId() || Meteor.userId() !== Uploads.findOne({_id: this.params._imgId}).owner) {
+			alert("You are not authorized to edit this image.");
+			this.redirect('home');
+		}
+		this.render('editImage', {
+			data: function() {
+				return Uploads.findOne({_id: this.params._imgId});
+			}
+		});
+	}
 });
 Router.route('/newGallery', function() {
 	if (!Meteor.userId()) {

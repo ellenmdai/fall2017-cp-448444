@@ -38,6 +38,7 @@ Template.uploads_grid.events({
 Template.imgBoxU.events({
   'click .delete_button'(event) {
     event.preventDefault();
+    console.log(event);
     var uploadId = event.target.value;
     Galleries.find().forEach(function(gallery) {
       if (gallery.regImages.includes(uploadId)) {
@@ -60,5 +61,10 @@ Template.imgBoxU.events({
       }
     });
     Uploads.remove(uploadId);
+  },
+  'click .edit_button'(event) {
+    event.preventDefault();
+    console.log(event);
+    Router.go('/editImage/' + event.target.value);
   }
 });

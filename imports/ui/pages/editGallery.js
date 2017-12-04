@@ -37,7 +37,6 @@ Template.editGallery.helpers({
   },
   regular: function() {
     return Uploads.find({_id: { $in: this.regImages }});
-    //TODO: filter by subscriptions
   },
   notIn: function() {
     var allIn = this.featured.concat(this.regImages);

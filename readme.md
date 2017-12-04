@@ -21,12 +21,9 @@ used cfs:filesystem to store uploads https://github.com/CollectionFS/Meteor-Coll
 meteor add pahans:reactive-modal
 
 TODO:
-initiate the upload in uploads.js-- event????
 css
 table css: uploads, galleries, selecting featured.
 scrollable tables
-allow users to choose galleries to add the image to upon first uploading
-show img thumbnails in edit page
 	
 FIRST THINGS FIRST:
 	
