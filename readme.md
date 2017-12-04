@@ -27,18 +27,11 @@ uploads-grid helper firing multiple times?
 router.go() doing database querying before new page loads...
 dialog boxes, can use jquery?
 hyperlink username in feed_in_gallery to their page.
-Allow multi-pic uploads if time
 table css: uploads, galleries, selecting featured.
 scrollable tables
-temporary states in editGallery
-allow viewing of anyone's portfolio, not just your own.
-have things show up in activity
 allow users to choose galleries to add the image to upon first uploading
-make creating a gallery its own page.
-mikerowe's subscribe list is not showing properly.
 	
 FIRST THINGS FIRST: get follow selector to add data to accounts,
-then get feedbody to respond the the follow only checkbox
 	
 	
 Showalluseruploads runs twice on initial (first time returns nothing),

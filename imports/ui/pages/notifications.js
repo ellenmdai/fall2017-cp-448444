@@ -35,7 +35,7 @@ Template.notifications.helpers({
 			//TODO: get urself off the not following list.
 			return Meteor.users.find({ $and: [{_id: { $not: { $in: folIds2 } } }, {_id: { $not: Meteor.userId() }}] });
 		}
-		return Meteor.users.find();
+		return Meteor.users.find({_id: { $not: Meteor.userId() } });
 	},
 	followActivity: function() {
 		return Activities.find({reciever: Meteor.userId()});
@@ -64,7 +64,24 @@ Template.notifications.events({
 			}
 		});
 		alert("You are now following someone new.");
-	}, 
+	},
+	'submit #removeFollow'(event) {
+		event.preventDefault();
+		console.log(event);
+		console.log(Meteor.user());
+		var addSelector = Template.instance().find('#removeSelector');
+		var newFollowArray = Meteor.user().following;
+		console.log(newFollowArray);
+		var index = newFollowArray.indexOf(addSelector.options[addSelector.selectedIndex].value);
+		newFollowArray.splice(index, 1);
+		console.log(newFollowArray);
+		Meteor.users.update({_id: Meteor.userId()}, {
+			$set: {
+				"following": newFollowArray
+			}
+		});
+		alert("You are no longer following that user.");
+	},
 });
 
 //ACTIVITIES TEMPLATE

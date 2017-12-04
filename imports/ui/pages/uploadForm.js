@@ -78,8 +78,6 @@ Template.uploadForm.events({
     // Clear form
     document.getElementById('image-to-upload').value = '';
 	document.getElementById('image-to-upload-caption').value = '';
+	alert("Pictures are uploaded!");
   },
-  'dropped #dropzone': function(e) {
-    console.log('dropped a file');
-  }
 });
