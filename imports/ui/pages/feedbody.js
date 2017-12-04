@@ -4,7 +4,6 @@ import {ReactiveDict} from 'meteor/reactive-dict';
 import {Router} from 'meteor/iron:router';
 
 import { Galleries } from '../../api/galleries.js';
-//import { Uploads } from '../../api/uploads.js';  // for testingn only; remove later
 
 import './feedbody.html';
 import '../components/gallery-in-feed.js';

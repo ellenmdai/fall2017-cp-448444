@@ -5,8 +5,11 @@ import { Uploads } from '../../api/uploads.js';
 import { SubmitRequests } from '../../api/submitrequests.js';
 import { Router } from 'meteor/iron:router';
 import './gallery-in-feed.html';
-//import './gallery-grid.js';
  
+Template.gallery_in_feed.onRendered(function() {
+	//this.find('#gg_grid_body').innerHTML = "";
+});
+
 Template.gallery_in_feed.helpers({
   isOwner() {
     return this.owner === Meteor.userId();
@@ -15,18 +18,6 @@ Template.gallery_in_feed.helpers({
 	return Uploads.find();
   },
 	loadImages() {
-    //if (this.isFeatured) {
-    //  grid.setAttribute('id', this.galleryId + "_ggF");
-    //}
-    //else {
-    //  grid.setAttribute('id', this.galleryId + "_gg");
-    //}
-    //if (document.getElementById('gg_body_grid')) {
-    //  //NOT WORKING WHYYYYY
-    //  document.getElementById('gg_grid_body').innerHTML = ''; // clear table
-    //}
-    //console.log(this.regImages);
-    //console.log(this.featured);
     var img;
     var newRow;
     var newEntry;
@@ -43,7 +34,7 @@ Template.gallery_in_feed.helpers({
         newRow = document.createElement('tr');
       }
       img = Uploads.findOne({_id: this.featured[i]});
-      //console.log(img);
+      console.log(this.name + ": " + img);
       newEntry = document.createElement('td');
       newEntry.setAttribute('class', 'gallery_cell');
       newEntryHyperlink = document.createElement('a');
@@ -69,7 +60,7 @@ Template.gallery_in_feed.helpers({
         newRow = document.createElement('tr');
       }
       img = Uploads.findOne({_id: this.regImages[i]});
-      //console.log(img);
+      console.log(this.name + ": " + img._id);
       newEntry = document.createElement('td');
       newEntry.setAttribute('class', 'gallery_cell');
       newEntryHyperlink = document.createElement('a');

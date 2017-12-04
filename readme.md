@@ -25,11 +25,10 @@ get image to display on page, not just on click
 css
 uploads-grid helper firing multiple times?
 router.go() doing database querying before new page loads...
-dialog boxes, can use jquery?
-hyperlink username in feed_in_gallery to their page.
 table css: uploads, galleries, selecting featured.
 scrollable tables
 allow users to choose galleries to add the image to upon first uploading
+delete uploads
 	
 FIRST THINGS FIRST: get follow selector to add data to accounts,
 	
