@@ -41,6 +41,9 @@ Template.newGallery.events({
     }
     var descriptionInput = document.getElementById('newGalDesc').value;
     var selectedImages = $('#imageSelector').val(); // array of image ids
+    if (selectedImages === null) {
+      selectedImages = [];
+    }
     var isOpen = document.getElementById('makeOpen').checked;
     //check(text, String);
  
