@@ -38,6 +38,7 @@ Showalluseruploads runs twice on initial (first time returns nothing),
 Router.go doesn't show queries because they are run before the new page is loaded
 Could not for the life of me figure out how to update user profiles in the user db, so made a new collection for follows.	
 possible source of img display issues: The provided value 'undefined' is not a valid enum value of type XMLHttpRequestResponseType.
+loads on delete
 	
 DONE:
 	ALSO: files not saved after server is stopped?

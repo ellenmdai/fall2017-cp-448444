@@ -15,9 +15,9 @@ Template.uploads_grid.onRendered(function() {
 });
 
 Template.uploads_grid.helpers({
-  //uploads: function() {
-  //  return Uploads.find();
-  //}
+  uploads: function() {
+    return Uploads.find({owner: Meteor.userId()});
+  },
   loadUploads() {
     //if (TempTemplate.instance().find('#ug_body_grid')) {
     //  //NOT WORKING WHYYYYY
@@ -82,13 +82,12 @@ Template.uploads_grid.events({
   //  alert("upload button clicked.  Will add modal later.");
   //  //$('#upload-box').dialog('show');
   //}
+});
+
+Template.imgBox.events({
   'click .delete_button'(event) {
     event.preventDefault();
     var uploadId = event.target.value;
     Uploads.remove(uploadId);
   }
-});
-
-Meteor.methods({
-  
 });
