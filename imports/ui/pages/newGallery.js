@@ -49,7 +49,7 @@ Template.newGallery.events({
     }
     console.log(selectedImages);
     console.log(galName);
-    console.log(descriptionInput)
+    console.log(descriptionInput);
     Galleries.insert({
       name: galName,
       description: descriptionInput,
@@ -60,10 +60,13 @@ Template.newGallery.events({
       owner: Meteor.userId(),
       username: Meteor.user().username,
     });
+    //TODO: create an activity alert
+    
     // clear form?
     document.getElementById('newGalName').value = "";
     document.getElementById('newGalDesc').value = "";
     // reset select box somehow
-    	alert("Created " + galName);
+    alert("Created " + galName);
+    Router.go('/portfolio');
   }  
 });
