@@ -1,12 +1,13 @@
 <template name="submitForm">
 	<div name='main'>
+		
+		{{> headerTemplate}}
+		
 		<h2>Send a request to {{name}}</h2>
 		<form id="new_submit_form" method="post" enctype="multipart/form-data">
-			Select image:<br><select name="imageSelector" id="imageSelector" size='10'>
-				{{#each usersUploads}}
-					<option value="{{this._id}}">{{this.name}}</option>
-				{{/each}}
-			</select><br>
+			Select an image:<br>
+			{{> uploadsSelector}}
+			<hr>
 			<textarea name='msg' id='msg' rows='5' cols='50' placeholder='message'></textarea><br>
 			<input type="submit" value="Send" name="sendSubmit" id="sendSubmit" />
 		</form>
