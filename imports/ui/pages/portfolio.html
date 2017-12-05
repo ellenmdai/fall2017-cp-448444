@@ -1,6 +1,9 @@
 <template name="portfolio">
+	
 	{{> headerTemplate}}
+	
 	<div class="main">
+		
 		<h1>Galleries</h1>
 		<button id='new_gallery_btn'>Create new gallery</button><br>
 		{{#each usersGalleries}}
@@ -8,9 +11,9 @@
 			<hr>
 		{{/each}}
 		<br><hr><br>
+		
 		<h1>Uploads</h1>
 			{{> uploads_grid}}
-		<!--TODO: make uploads section only appear if this is the user's portfolio-->
 		<br><hr><br>
 	</div>
 </template>

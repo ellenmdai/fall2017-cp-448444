@@ -1,12 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import {ReactiveDict} from 'meteor/reactive-dict';
-
-import { Galleries } from '../../api/galleries.js';
-import { Uploads } from '../../api/uploads.js';
 import { SubmitRequests } from '../../api/submitrequests.js';
 import { Activities } from '../../api/activities.js';
-
 import './notifications.html';
 import '../components/header.js';
 import '../components/submitRequestUI.js';
@@ -16,7 +12,7 @@ Template.notifications.onCreated(function() {
   Meteor.subscribe('uploads');
   Meteor.subscribe('galleries');
 	Meteor.subscribe('submitrequests');
-	Meteor.subscribe('userData');
+	Meteor.subscribe('userData');	//for following
 	Meteor.subscribe('activities');
 });
 
@@ -32,14 +28,16 @@ Template.notifications.helpers({
 	notFollowing: function() {
 		var folIds2 = Meteor.user().following;
 		if (folIds2 !== undefined) {
-			//TODO: get urself off the not following list.
+			//list won't include yourself despite not following yourself.
 			return Meteor.users.find({ $and: [{_id: { $not: { $in: folIds2 } } }, {_id: { $not: Meteor.userId() }}] });
 		}
 		return Meteor.users.find({_id: { $not: Meteor.userId() } });
 	},
+	//retrieve any activities meant for you
 	followActivity: function() {
 		return Activities.find({reciever: Meteor.userId()});
 	},
+	//retrieve requests to your galleries
 	requests: function() {
 		return SubmitRequests.find({to: Meteor.userId()});
 	}
@@ -49,10 +47,8 @@ Template.notifications.events({
   'submit #addFollow'(event) {
 		event.preventDefault();
 		console.log(event);
-		console.log(Meteor.user());
 		var addSelector = Template.instance().find('#addSelector');
 		var newFollowArray = Meteor.user().following;
-		console.log(newFollowArray);
 		if (newFollowArray === undefined) {
 			newFollowArray = [];
 		}
@@ -68,10 +64,8 @@ Template.notifications.events({
 	'submit #removeFollow'(event) {
 		event.preventDefault();
 		console.log(event);
-		console.log(Meteor.user());
 		var addSelector = Template.instance().find('#removeSelector');
 		var newFollowArray = Meteor.user().following;
-		console.log(newFollowArray);
 		var index = newFollowArray.indexOf(addSelector.options[addSelector.selectedIndex].value);
 		newFollowArray.splice(index, 1);
 		console.log(newFollowArray);

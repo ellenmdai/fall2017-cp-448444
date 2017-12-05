@@ -1,33 +1,21 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
-import {ReactiveDict} from 'meteor/reactive-dict';
 import { Uploads } from '../../api/uploads.js';
 import { Galleries } from '../../api/galleries.js';
 import { Router } from 'meteor/iron:router';
-
 import './uploads-grid.html';
 
 Template.uploads_grid.onCreated(function() {
   Meteor.subscribe('uploads');
 });
 
-Template.uploads_grid.onRendered(function() {
-  
-});
-
 Template.uploads_grid.helpers({
   uploads: function() {
-    return Uploads.find({owner: Meteor.userId()});
+    return Uploads.find({owner: Meteor.userId()});  // only get the images uploaded by this user
   }
 });
 
 Template.uploads_grid.events({
-  //'click .goto-upload'(event) {
-  //  event.preventDefault();
-  //  console.log(event);
-  //  alert("upload button clicked.  Will add modal later.");
-  //  //$('#upload-box').dialog('show');
-  //}
   'click #goto-upload'(event) {
     event.preventDefault();
     console.log(event);
@@ -40,6 +28,7 @@ Template.imgBoxU.events({
     event.preventDefault();
     console.log(event);
     var uploadId = event.target.value;
+    //delete the image reference from all galleries
     Galleries.find().forEach(function(gallery) {
       if (gallery.regImages.includes(uploadId)) {
         var newReg = gallery.regImages;
@@ -60,6 +49,7 @@ Template.imgBoxU.events({
         });
       }
     });
+    //remove the image from the database
     Uploads.remove(uploadId);
   },
   'click .edit_button'(event) {

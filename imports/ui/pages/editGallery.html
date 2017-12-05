@@ -1,7 +1,8 @@
 <template name="editGallery">
-  <div class="main">
-    
-    {{> headerTemplate}}
+	
+  {{> headerTemplate}}
+	
+	<div class="main">
     
     <h2>{{_id}}</h2>
     
@@ -11,6 +12,8 @@
       <hr>
       Choose which images to include or remove by clicking on the thumbnail.
 			Check the box to feature an image.<br>
+			
+			<!--tables referenced from https://www.w3schools.com/html/html_tables.asp-->
       <table id="ug_grid">
         <thead><tr>
           <th>Featured</th><th>Regular</th><th>Add</th>
@@ -36,12 +39,15 @@
         </tr></tbody> 
       </table>
       <hr>
+			
       <label class="hide-completed">
         <input type="checkbox" id='makeOpen' checked={{open}}/>
         Make open to submission
       </label><br>
       <input type="submit" value="Save" name="editGalBtn" id="editGalBtn" />
     </form>
+		
 		<br><hr><br>
+		<button type='button' id='goBack'>Back to my page</button>
   </div>
 </template>

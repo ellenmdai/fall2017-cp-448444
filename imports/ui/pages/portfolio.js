@@ -2,10 +2,8 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import {ReactiveDict} from 'meteor/reactive-dict';
 import { Router } from 'meteor/iron:router';
-
 import { Galleries } from '../../api/galleries.js';
-import { Uploads } from '../../api/uploads.js';  // for testingn only; remove later
-
+import { Uploads } from '../../api/uploads.js';
 import './portfolio.html';
 import '../components/gallery-in-feed.js';
 import '../components/uploads-grid.js';

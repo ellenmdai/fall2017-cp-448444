@@ -5,14 +5,11 @@
 		{{#each uploads}}
 			{{> imgBoxU}}
 		{{/each}}
-		<!--<table id="ug_grid">
-			<tbody id='ug_grid_body'>
-				{{loadUploads}}
-			</tbody> 
-		</table>-->
 	</div>
 </template>
 
+<!--imgBox shows a hyperlinked thumbnail, name, caption,
+and buttons for editing and deleting-->
 <template name="imgBoxU">
 	<div class="imgBoxU">
 		<a href="{{this.url store='images'}}" target="_blank"><img src="{{this.url store='thumbs'}}" alt="{{this.name}}" class="thumbnail" /></a><br>

@@ -3,7 +3,6 @@ import { Meteor } from 'meteor/meteor';
 import { Router } from 'meteor/iron:router';
 import { Uploads } from '../imports/api/uploads.js';
 import { Galleries } from '../imports/api/galleries.js';
-import { SubmitRequests } from '../imports/api/submitrequests.js';
 import '../imports/startup/accounts-config.js';
 import '../imports/ui/pages/feedbody.js';
 import '../imports/ui/pages/portfolio.js';
@@ -15,7 +14,9 @@ import '../imports/ui/pages/newGallery.js';
 import '../imports/ui/pages/editImage.js';
 
 /*Router code learned from http://meteortips.com/second-meteor-tutorial/iron-router-part-1/
-and http://iron-meteor.github.io/iron-router/*/
+and http://iron-meteor.github.io/iron-router/
+Pages that are private to the current user, like editing,
+check for it and are otherwise rerouted to the homepage*/
 Router.route('/', function() {
 	this.render('feedbody');
 }, {
@@ -40,6 +41,7 @@ Router.route('/editImage/:_imgId', {
 		Meteor.subscribe('uploads', this.params._imgId);
 	},
 	action: function() {
+		//if someone else is trying to edit the image, redirect to another page.
 		if(!Meteor.userId() || Meteor.userId() !== Uploads.findOne({_id: this.params._imgId}).owner) {
 			alert("You are not authorized to edit this image.");
 			this.redirect('home');
@@ -63,6 +65,11 @@ Router.route('/editGallery/:_galId', {
 		Meteor.subscribe('galleries', this.params._galId);
 	},
 	action: function() {
+		//if someone else is trying to edit the gallery, redirect to another page.
+		if(!Meteor.userId() || Meteor.userId() !== Galleries.findOne({_id: this.params._galId}).owner) {
+			alert("You are not authorized to edit this image.");
+			this.redirect('home');
+		}
 		this.render('editGallery', {
 			data: function() {
 				return Galleries.findOne({_id: this.params._galId});
@@ -71,6 +78,10 @@ Router.route('/editGallery/:_galId', {
 	}
 });
 Router.route('/submitForm/:_galId', function() {
+	if (!Meteor.userId()) {
+		alert("Please log in to submit an image.");
+		this.redirect('home');
+	}
 	this.render('submitForm', {
 		data: function() {
 			return Galleries.findOne({_id: this.params._galId});
@@ -88,26 +99,3 @@ Router.route('/notifications/:_usrId', function() {
 	}
 	this.render('notifications');
 }); 
-//Router.route('/cfs/files/uploads/:imageId', function() {
-//	var imageId = this.params.imageId;
-//	
-//	  // Read from a CollectionFs FS.File
-//	  // Assumes you have a "Pdfs" CollectionFs
-//	  var image = Pdfs.findOne({_id: imageId});
-//	  var readable = image.createReadStream("tmp");
-//	  var buffer = new Buffer(0);
-//	  readable.on("data", function(buffer) {
-//		buffer = buffer.concat([buffer, readable.read()]);
-//	  });
-//	  readable.on("end", function() {
-//		this.response.writeHead(200, {
-//		  //"Content-Type": "application/pdf",
-//		  "Content-Length": buffer.length
-//		});
-//		this.response.write(buffer);
-//		this.response.end();
-//	  });
-//	}, {
-//	  where: "server"
-//	}
-//);

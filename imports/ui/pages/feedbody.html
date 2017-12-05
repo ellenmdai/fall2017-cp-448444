@@ -1,9 +1,11 @@
 <template name="feedbody">
+      
+  {{> headerTemplate}}
+    
   <div class="main">
+
     
-    {{> headerTemplate}}
-    
-    {{#if currentUser}}
+    {{#if currentUser}} <!--if the user is currently logged in, allow option to just show follows-->
       <label>
         <input type="checkbox" id="show-following-only" />
         Only show subscribed users

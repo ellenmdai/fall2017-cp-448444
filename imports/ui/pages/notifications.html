@@ -1,9 +1,11 @@
 <template name="notifications">
+	
 	{{> headerTemplate}}
+	
 	<div class="main">
 		<h1>Activity</h1><br>
-		<button id='following' value='following'>Manage follows</button><br>
-		<div id='follow_select_div'>
+		
+		<div id='follow_select_div'><hr>
 			<form id="addFollow" method="post" enctype="multipart/form-data">
 				Select a user to follow: <select name="addSelector" id="addSelector">
 					{{#each notFollowing}}
@@ -20,24 +22,27 @@
 				</select><br>
 				<input type="submit" name="removeFollowSubmit" id="removeFollowSubmit" value="Unfollow" />
 			</form>
-		</div><br>
+		<hr></div><br>
+		
 		{{#each followActivity}}
 			{{> activity}}
 			<hr>
 		{{/each}}
 		<br><hr><br>
+		
 		<h1>Submission Requests</h1>
 			<!--TODO-->
 			{{#each requests}}
 				{{> submitRequest}}<hr>
 			{{/each}}
 		<br><hr><br>
+		
 	</div>
 </template>
 
 <template name="activity">
 	{{#if newGallery}}
-		{{senderUsername}} just created a new gallery named <strong>{{galleryName}}</strong>!<br>
+		<strong>{{senderUsername}}</strong> just created a new gallery named <strong>{{galleryName}}</strong>!<br>
 		{{#if open}}
 			It's open for submission too, so go check it out and send in your own work!<br>
 		{{/if}}

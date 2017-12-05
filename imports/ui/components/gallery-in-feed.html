@@ -7,10 +7,12 @@
 	{{else}}
 		{{#if currentUser}}
 			{{#if open}}
+				<!--if the user is logged in and the gallery accepts submissions, show the submission button-->
 				<button type="button" class="submitAnImg" value="{{_id}}">Submit an image</button><br>
 			{{/if}}
 		{{/if}}
 	{{/if}}
+	
 	{{description}}<br>
 	<div class='featured'>
 		<strong>Featured: </strong><br>
@@ -35,6 +37,7 @@
 	</div>
 </template>
 
+<!--featured images get slightly different css-->
 <template name="imgBoxF">
 	<div class="imgBoxF">
 		<a href="{{this.url store='images'}}" target="_blank"><img src="{{this.url store='thumbs'}}" alt="{{this.name}}" class="thumbnail" /></a><br>

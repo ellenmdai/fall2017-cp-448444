@@ -1,9 +1,11 @@
 <template name="uploadForm">
+	
 	{{> headerTemplate}}
+	
 	<div id="main">
 		<h1>New Uploads</h1>
 		<form id="upload_form" method="post" enctype="multipart/form-data">
-			Select images to upload:
+			Select images to upload:<br>
 			<input type="file" name="image-to-upload" id="image-to-upload" multiple/><br>
 			<input type="text" placeholder="optional caption" name="image-to-upload-caption" id="image-to-upload-caption" /><br><br>
 			Select any galleries you would like to add the images to immediately:<br>

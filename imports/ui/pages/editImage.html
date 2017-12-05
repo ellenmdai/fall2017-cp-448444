@@ -1,5 +1,7 @@
 <template name='editImage'>
+	
 	{{> headerTemplate}}
+	
 	<div id='main'>
 		<h1>{{this.name}}</h1>
 		<img src="{{this.url store='images'}}" alt="{{this.name}}" class="bigImage" /><br>
@@ -9,4 +11,5 @@
 		</form>
 		<button type='button' id='goBack'>Back</button>
 	</div>
+	
 </template>

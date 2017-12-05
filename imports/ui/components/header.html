@@ -1,10 +1,11 @@
 <template name="headerTemplate">
 	<header>
-      <h1>Photoblogger</h1>
+      <h1>The Awesome Photoblogger</h1>
       
-      {{> loginButtons}}
+	  <!--https://www.meteor.com/tutorials/blaze/adding-user-accounts-->
+      {{> loginButtons}} <!--button and box for login-->
       
-      {{#if currentUser}}
+      {{#if currentUser}} <!--if logged in, show buttons-->
           <button type="button" class="home">Home</button>
 		  <button type="button" class="my-page">My page</button>
           <button type="button" class="goto-upload">Upload</button>

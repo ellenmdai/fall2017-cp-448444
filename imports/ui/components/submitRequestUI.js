@@ -3,25 +3,24 @@ import { Template } from 'meteor/templating';
 import { Uploads } from '../../api/uploads.js';
 import { Galleries } from '../../api/galleries.js';
 import { SubmitRequests } from '../../api/submitrequests.js';
-import { Router } from 'meteor/iron:router';
 import './submitRequestUI.html';
-//import './gallery-grid.js';
- 
-Template.submitRequest.onCreated(function() {
-	
-});
 
 Template.submitRequest.helpers({
 	galleryName: function() {
 		return Galleries.findOne({_id: this.gallery}).name;
 	},
+	getThumb: function() {
+		return Uploads.findOne({_id: this.image}).url('thumbs');
+	},
 	getUrl: function() {
-		return Uploads.findOne({_id: this.image}).url('imageStore');
+		return Uploads.findOne({_id: this.image}).url('images');
 	},
 	getImgName: function() {
 		var theUpload = Uploads.findOne({_id: this.image});
-		console.log(theUpload);
 		return theUpload.name;
+	},
+	getSenderName: function() {
+		return Meteor.users.findOne({_id: this.from}).username;
 	}
 });
 
@@ -29,6 +28,7 @@ Template.submitRequest.events({
 	'click .approveSubmit'(event) {
 		event.preventDefault();
 		console.log(event);
+		//add the image id to the gallery's appropriate lsit
 		var theRegs = Galleries.findOne({_id: this.gallery}).regImages;
 		theRegs.push(this.image);
 		Galleries.update(this.gallery, {

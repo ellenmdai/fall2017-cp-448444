@@ -2,36 +2,19 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import {ReactiveDict} from 'meteor/reactive-dict';
 import {Router} from 'meteor/iron:router';
-
 import { Galleries } from '../../api/galleries.js';
-import { Uploads } from '../../api/uploads.js';  // for testingn only; remove later
+import { Uploads } from '../../api/uploads.js';
 
 import './editGallery.html';
-//import '../components/uploads-grid.js';
 import '../components/header.js';
 
 Template.editGallery.onCreated(function bodyOnCreated() {
   this.state = new ReactiveDict();
   Meteor.subscribe('galleries');
   Meteor.subscribe('uploads');
-  //TODO: figure out how to access data context for below
-  //this.state.set('tmpFeatured', this.featured);
-  //this.state.set('tmpRegular', this.regImages);
-  //TODO: code below doesn't belong in onCreated I think...
-  //if (this.owner !== Meteor.userId()) {
-  //  alert("You are not authorized to edit this gallery.");
-  //  Router.go('home');
-  //}
-});
-
-Template.editGallery.onRendered(function() {
-  
 });
 
 Template.editGallery.helpers({
-  isOwner() {
-    return this.owner === Meteor.userId();
-  },
   featured: function() {
     return Uploads.find({_id: { $in: this.featured }});
   },
@@ -45,6 +28,7 @@ Template.editGallery.helpers({
   }
 });
 
+//If the id's not in the list, add it; otherwise remove it.
 Array.prototype.swapOut = function(str) {
   var i = this.indexOf(str);
   var newArray = this;
@@ -66,7 +50,6 @@ Template.editGallery.events({
       alert("The name cannot be blank.");
       throw new Meteor.Error("empty name");
     }
-    console.log(newName);
     var gallery = Template.parentData(0);
     Galleries.update({_id: gallery._id}, {
       $set: {
@@ -77,6 +60,7 @@ Template.editGallery.events({
     });
     alert("The gallery has been updated. Go back to your portfolio to see the changes.");
   },
+  //set or unset image as featured
   'change .featuredCheck'(event) {
     event.preventDefault();
     var gallery = Template.parentData(0);
@@ -90,11 +74,13 @@ Template.editGallery.events({
       }
     });
   },
+  //add or remove image from the gallery
   'click .thumbnail'(event) {
     event.preventDefault();
     var gallery = Template.parentData(0);
     var imgId = event.target.id;
     console.log(event);
+    //remove:
     if (gallery.featured.includes(imgId)) {
       var newFeatured = gallery.featured;
       newFeatured.splice(newFeatured.indexOf(imgId), 1);
@@ -104,6 +90,7 @@ Template.editGallery.events({
         }
       });
     }
+    //remove:
     else if (gallery.regImages.includes(imgId)) {
       var newRegular = gallery.regImages;
       newRegular.splice(newRegular.indexOf(imgId),1);
@@ -113,6 +100,7 @@ Template.editGallery.events({
         }
       });
     }
+    //add:
     else {
       var newRegular2 = gallery.regImages;
       newRegular2.push(imgId);
@@ -122,5 +110,10 @@ Template.editGallery.events({
         }
       });
     }
+  },
+  'click #goBack'(event) {
+    event.preventDefault();
+    console.log(event);
+    Router.go('/portfolio');
   }
 });

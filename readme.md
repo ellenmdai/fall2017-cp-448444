@@ -18,7 +18,6 @@ kill -9 `ps ax | grep node | grep meteor | awk '{print $1}'`
 
 
 used cfs:filesystem to store uploads https://github.com/CollectionFS/Meteor-CollectionFS
-meteor add pahans:reactive-modal
 
 TODO:
 css

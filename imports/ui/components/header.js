@@ -1,15 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
-import { JQuery } from 'meteor/jquery';
 import { Router } from 'meteor/iron:router';
-
-//import { Uploads } from '../../api/uploads.js';
-
 import './header.html';
-
-Template.headerTemplate.helpers({
-  
-});
 
 Template.headerTemplate.events({
   'click .goto-upload'(event) {

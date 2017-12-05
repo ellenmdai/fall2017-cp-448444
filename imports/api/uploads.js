@@ -1,53 +1,42 @@
 import { Meteor } from 'meteor/meteor';
-//import { FileSystem } from 'meteor/cfs:filesystem';
-import { GridFS } from 'meteor/cfs:gridfs';
-import { Mongo } from 'meteor/mongo';
+//import { GridFS } from 'meteor/cfs:gridfs';
+//import { Mongo } from 'meteor/mongo';
 import { check } from 'meteor/check';
 
 // setting up the collection based on https://github.com/CollectionFS/Meteor-CollectionFS#storage-adapters
-var imageStore = new FS.Store.GridFS("images", {
-  //mongoUrl: 'mongodb://127.0.0.1:27017/test/', // optional, defaults to Meteor's local MongoDB
-  //mongoOptions: {...},  // optional, see note below
-  //transformWrite: myTransformWriteFunction, //optional
-  //transformRead: myTransformReadFunction, //optional
-  //maxTries: 1, // optional, default 5
-  //chunkSize: 1024*1024  // optional, default GridFS chunk size in bytes (can be overridden per file).
-  //                      // Default: 2MB. Reasonable range: 512KB - 4MB
-});
+var imageStore = new FS.Store.GridFS("images", {});
 
 export const Uploads = new FS.Collection('uploads', {
 	stores: [
 		//https://github.com/numtel/meteor-cfs-image-resize
 		new FS.Store.GridFS("thumbs", {
-      beforeWrite: function(fileObj) {
-        // We return an object, which will change the
-        // filename extension and type for this store only.
-        return {
-          extension: 'jpeg',
-          type: 'image/jpeg'
-        };
-      },
-      transformWrite: resizeImageStream({
-        width: 240,
-        height: 180,
-        format: 'image/jpeg',
-        quality: 50
-      })
+		beforeWrite: function(fileObj) {
+			// We return an object, which will change the
+			// filename extension and type for this store only.
+			return {
+			  extension: 'jpeg',
+			  type: 'image/jpeg'
+			};
+		},
+		transformWrite: resizeImageStream({
+		  width: 240,
+		  height: 180,
+		  format: 'image/jpeg',
+		  quality: 50
+		})
     }),
-		imageStore
+	imageStore
 	],
 	filter: {
-    //maxSize: 1048576, // in bytes
-    //ADD BACK LATER
 		allow: {
-      contentTypes: ['image/*'],
+		contentTypes: ['image/*'],
     },
     onInvalid: function (message) {
-      if (Meteor.isClient) {
-        alert(message);
-      } else {
-        console.log(message);
-      }
+		if (Meteor.isClient) {
+		  alert(message);
+		} else {
+		  console.log(message);
+		}
     }
   }
 });
@@ -68,9 +57,7 @@ if (Meteor.isServer) {
 		return true;
 	}
   });
-  // Only publish tasks that are public or belong to the current user
   Meteor.publish('uploads', function uploadsPublication() {
-	// stuff here
 		return Uploads.find();
   });
 }
@@ -105,7 +92,7 @@ Meteor.methods({
 	const upload = Uploads.findOne({_id: uploadId});
     if (upload.owner !== Meteor.userId()) {
       //make sure only the owner can delete it
-	  alert("You are the the owner of this image. Cannot delete.")
+	  alert("You are the the owner of this image. Cannot delete.");
       throw new Meteor.Error('not-authorized');
     }  
     Uploads.remove({_id: uploadId});
