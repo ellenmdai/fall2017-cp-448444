@@ -1,8 +1,26 @@
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import { check } from 'meteor/check';
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import { ValidatedMethod } from 'meteor/mdg:validated-method';
 
 export const SubmitRequests = new Mongo.Collection('submitrequests');
+
+export const insertSubmitRequest = new ValidatedMethod({
+  name: 'submitrequests.insert',
+  validate: new SimpleSchema({
+    from: {type: String},
+    to: {type: String},
+    gallery: {type: String},
+    image: {type: String},
+  }).validator(),
+  run(submitReq) {
+    if (!Meteor.userId) {
+      throw new Meteor.Error('unauthorized', 'You must be logged in');
+    }
+    SubmitRequests.insert(submitReq);
+  }
+});
 
 
 if (Meteor.isServer) {
@@ -11,8 +29,10 @@ if (Meteor.isServer) {
   });
 }
 
+
+
 Meteor.methods({
-//  'galleries.insert'(name, regImages, featured) {
+//  'submitrequests.insert'({name, regImages, featured}) {
 //    //check(text, String);
 // 
 //    // Make sure the user is logged in before inserting a task

@@ -4,6 +4,7 @@ import {ReactiveDict} from 'meteor/reactive-dict';
 import {Router} from 'meteor/iron:router';
 import { Uploads } from '../../api/uploads.js';
 import { SubmitRequests } from '../../api/submitrequests.js';
+import { insertSubmitRequest } from '../../api/submitrequests.js';
 import './submitForm.html';
 import '../components/header.js';
 
@@ -37,13 +38,24 @@ Template.submitForm.events({
 		var galOwnerId = Template.parentData(0).owner;
 		var msg = Template.instance().find('#msg').value;
 		// insert request into database
-		SubmitRequests.insert({
-				from: Meteor.userId(),
-				to: galOwnerId,
-			gallery: galleryId,
-				image: selectedImageId[0],
-				message: msg
-			});
+		insertSubmitRequest.call({
+					from: Meteor.userId(),
+					to: galOwnerId,
+					gallery: galleryId,
+					image: selectedImageId[0],
+					message: msg
+		}, function(err) {
+			if(err) {
+				alert(err.reason);
+			}
+		});
+		//SubmitRequests.insert({
+		//		from: Meteor.userId(),
+		//		to: galOwnerId,
+		//		gallery: galleryId,
+		//		image: selectedImageId[0],
+		//		message: msg
+		//	});
 		alert("Your submission has been sent. If the gallery's owner approves it, it will be added to the collection.");
 		Router.go('home');
 	},
