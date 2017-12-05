@@ -49,13 +49,6 @@ Template.submitForm.events({
 				alert(err.reason);
 			}
 		});
-		//SubmitRequests.insert({
-		//		from: Meteor.userId(),
-		//		to: galOwnerId,
-		//		gallery: galleryId,
-		//		image: selectedImageId[0],
-		//		message: msg
-		//	});
 		alert("Your submission has been sent. If the gallery's owner approves it, it will be added to the collection.");
 		Router.go('home');
 	},

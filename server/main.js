@@ -15,7 +15,7 @@ Meteor.users.allow({
 Meteor.startup(function() {
 	/*extra defense agains XXS attacks
 	 *http://www.east5th.co/blog/2015/09/07/hijacking-meteor-accounts-with-xss/*/
-	BrowserPolicy.disallowInlineScripts();
+	BrowserPolicy.content.disallowInlineScripts();
 });
 
 //https://stackoverflow.com/questions/19391308/custom-fields-on-meteor-users-not-being-published

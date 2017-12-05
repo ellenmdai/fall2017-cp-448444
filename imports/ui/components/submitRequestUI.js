@@ -3,6 +3,7 @@ import { Template } from 'meteor/templating';
 import { Uploads } from '../../api/uploads.js';
 import { Galleries } from '../../api/galleries.js';
 import { SubmitRequests } from '../../api/submitrequests.js';
+import { removeSubmitRequest } from '../../api/submitrequests.js';
 import './submitRequestUI.html';
 
 Template.submitRequest.helpers({
@@ -36,7 +37,12 @@ Template.submitRequest.events({
 				regImages: theRegs
 			}
 		});
-		SubmitRequests.remove(this._id);
+		//SubmitRequests.remove(this._id);
+		removeSubmitRequest.call({_id: this._id}, function(err) {
+			if(err) {
+				alert(err.reason);
+			}
+		});
 		alert("The image has been added to your gallery.");
 	},
 	'click .approveSubmitF'(event) {
