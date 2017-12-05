@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
+import { Match } from 'meteor/check';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 
@@ -12,7 +13,7 @@ export const insertSubmitRequest = new ValidatedMethod({
     to: {type: String},
     gallery: {type: String},
     image: {type: String},
-    msg: {type: String, optional: true}
+    message: {type: Match.OneOf(String, null)}
   }).validator(),
   run(submitReq) {
     if (!Meteor.userId) {
