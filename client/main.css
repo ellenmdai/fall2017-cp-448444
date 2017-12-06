@@ -1,1 +1,88 @@
 /* CSS declarations go here */
+body{
+		width: 1100px;
+		background-color: aliceblue;
+		margin: 0 auto;
+		padding: 0;
+		font:12px/16px Verdana, sans-serif;
+	}
+div.main{
+		background-color: #FFF;
+		margin: 0;
+		padding: 10px;
+}
+div.galDescription{
+		margin: 10px;
+		text-align: center;
+		font-style: italic;
+		font-size: 150%;
+}
+img{
+	display: block;
+    margin: auto;
+}
+div.featured{
+	display: block;
+	text-align: center;
+}
+div.regular{
+	display: block;
+	text-align: center;
+}
+div.imgBox{
+	/*inline: https://stackoverflow.com/questions/224602/how-do-you-make-div-elements-display-inline*/
+	display: inline-block;
+	vertical-align: top;
+	text-align: center;
+	width: 250px;
+	min-height: 200px;
+	margin: 5px;
+}
+div.imgBoxF{
+	/*inline: https://stackoverflow.com/questions/224602/how-do-you-make-div-elements-display-inline*/
+	display: inline-block;
+	vertical-align: top;
+	text-align: center;
+	width: 250px;
+	min-height: 200px;
+	margin: 5px;
+}
+div.uploads_grid{
+	display: block;
+	text-align: center;
+}
+div.imgBoxU{
+	/*inline: https://stackoverflow.com/questions/224602/how-do-you-make-div-elements-display-inline*/
+	display: inline-block;
+	vertical-align: top;
+	text-align: center;
+	width: 250px;
+	min-height: 250px;
+	margin: 5px;
+}
+div.imgBoxC{
+	/*inline: https://stackoverflow.com/questions/224602/how-do-you-make-div-elements-display-inline*/
+	display: inline-block;
+	vertical-align: top;
+	text-align: center;
+	width: 250px;
+	min-height: 250px;
+	margin: 5px;
+}
+/*https://www.w3schools.com/css/css_table.asp*/
+table#ug_grid{
+	width: 100%;
+	border-collapse: collapse;
+	border-bottom: 1px solid black;
+}
+table#ug_grid th{
+	padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+	border-bottom: 1px solid black;
+}
+table#ug_grid td{
+	vertical-align: top;
+	border-left: 1px solid black;
+	border-right: 1px solid black;
+}

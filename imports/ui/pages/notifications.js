@@ -3,6 +3,7 @@ import { Template } from 'meteor/templating';
 import {ReactiveDict} from 'meteor/reactive-dict';
 import { SubmitRequests } from '../../api/submitrequests.js';
 import { Activities } from '../../api/activities.js';
+import { removeActivity } from '../../api/activities.js';
 import './notifications.html';
 import '../components/header.js';
 import '../components/submitRequestUI.js';
@@ -94,6 +95,12 @@ Template.activity.events({
 	'click #markRead'(event) {
 		event.preventDefault();
 		console.log(event);
-		Activities.remove(this._id);
+		removeActivity.call(
+			{_id: this._id},
+		function(err) {
+			if(err) {
+				alert(err.reason);
+			}
+		});
 	}
 });

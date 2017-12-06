@@ -1,6 +1,6 @@
 <template name="gallery_in_feed">
 <div class="gallery_in_feed">
-	<h2>{{name}}</h2> by {{username}}<br>
+	<h2>{{name}}</h2> by {{username}}   
 	
 	{{#if isOwner}}
 		<button type="button" class="editGallery" value="{{_id}}">Edit</button><br>
@@ -13,15 +13,16 @@
 		{{/if}}
 	{{/if}}
 	
-	{{description}}<br>
+	<div class="galDescription">{{description}}</div>
+	
+	<span><strong>Featured: </strong></span><br>
 	<div class='featured'>
-		<strong>Featured: </strong><br>
 		{{#each getFeatured}}
 			{{> imgBoxF}}
 		{{/each}}
 	</div>
+	<span><strong>Other: </strong></span><br>
 	<div class='regular'>
-		<strong>Other: </strong><br>
 		{{#each getRegImages}}
 			{{> imgBox}}
 		{{/each}}
@@ -32,7 +33,6 @@
 <template name="imgBox">
 	<div class="imgBox">
 		<a href="{{this.url store='images'}}" target="_blank"><img src="{{this.url store='thumbs'}}" alt="{{this.name}}" class="thumbnail" /></a><br>
-		{{this.name}}<br>
 		Caption: {{this.caption}}<br>
 	</div>
 </template>
@@ -41,7 +41,6 @@
 <template name="imgBoxF">
 	<div class="imgBoxF">
 		<a href="{{this.url store='images'}}" target="_blank"><img src="{{this.url store='thumbs'}}" alt="{{this.name}}" class="thumbnail" /></a><br>
-		{{this.name}}<br>
-		Caption: {{this.caption}}<br>
+		{{this.caption}}<br>
 	</div>
 </template>

@@ -2,14 +2,16 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import {ReactiveDict} from 'meteor/reactive-dict';
 import {Router} from 'meteor/iron:router';
-import { Galleries } from '../../api/galleries.js';
+//import { Galleries } from '../../api/galleries.js';
+import { insertGallery } from '../../api/galleries.js';
 import { Uploads } from '../../api/uploads.js';
-import { Activities } from '../../api/activities.js';
+//import { Activities } from '../../api/activities.js';
+import { insertActivity } from '../../api/activities.js';
 import './newGallery.html';
 import '../components/header.js';
 import '../components/uploadsSelector.js';
 
-Template.newGallery.onCreated(function bodyOnCreated() {
+Template.newGallery.onCreated(function() {
   this.state = new ReactiveDict();
   Meteor.subscribe('galleries');
   Meteor.subscribe('uploads');
@@ -45,7 +47,7 @@ Template.newGallery.events({
       throw new Meteor.Error('not-authorized');
     }
     //create new gallery using given data
-    Galleries.insert({
+    insertGallery.call({
       name: galName,
       description: descriptionInput,
       regImages: selectedImages,
@@ -54,7 +56,12 @@ Template.newGallery.events({
       createdAt: new Date(),
       owner: Meteor.userId(),
       username: Meteor.user().username,
-    });
+		}, function(err) {
+			if(err) {
+        console.log(err);
+				alert(err.reason);
+			}
+		});
     // send notifications to followers
     var followers = [];
     Meteor.users.find().forEach(function(usr) {
@@ -63,13 +70,18 @@ Template.newGallery.events({
       }
     });
     for (var i = 0; i < followers.length; i++) {
-      Activities.insert({
+      insertActivity.call({
         reciever: followers[i],
         type: "new gallery",
         galleryName: galName,
         open: isOpen,
         sender: Meteor.userId(),
         senderUsername: Meteor.user().username
+      }, function(err) {
+        if(err) {
+          console.log(err);
+          alert(err.reason);
+        }
       });
     }
     

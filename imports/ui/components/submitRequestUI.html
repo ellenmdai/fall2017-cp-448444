@@ -1,8 +1,10 @@
 <template name='submitRequest'>
-	Request from {{getSenderName}} to <strong>{{galleryName}}</strong>: <br>
-	<a href="{{getUrl}}" target="_blank"><img src="{{getThumb}}" alt="can't display image" class="thumbnail" id="{{image}}" /></a><br>
-	Message: {{message}} <br>
-	<button type="button" class="approveSubmit">Approve</button>
-	<button type="button" class="approveSubmitF">Approve and feature</button>   
-	<button type="button" class="denySubmit">Deny</button>
+	<div class="submitRequest">
+		Request from {{getSenderName}} to <strong>{{galleryName}}</strong>: <br>
+		<a href="{{getUrl}}" target="_blank"><img src="{{getThumb}}" alt="can't display image" class="thumbnail" id="{{image}}" /></a><br>
+		Message: {{message}} <br>
+		<button type="button" class="approveSubmit">Approve</button>
+		<button type="button" class="approveSubmitF">Approve and feature</button>   
+		<button type="button" class="denySubmit">Deny</button>
+	</div>
 </template>

@@ -1,7 +1,6 @@
 <template name="uploads_grid">
+	<button type='button' id='goto-upload'>Upload new images</button><br><br>
 	<div class="uploads_grid">
-		<h2>Your Uploads</h2>
-		<button type='button' id='goto-upload'>Upload new images</button><br><br>
 		{{#each uploads}}
 			{{> imgBoxU}}
 		{{/each}}
@@ -13,7 +12,7 @@ and buttons for editing and deleting-->
 <template name="imgBoxU">
 	<div class="imgBoxU">
 		<a href="{{this.url store='images'}}" target="_blank"><img src="{{this.url store='thumbs'}}" alt="{{this.name}}" class="thumbnail" /></a><br>
-		{{this.name}}<br>
+		<strong>{{this.name}}</strong><br>
 		Caption: {{this.caption}}<br>
 		<button type='button' class='edit_button' value={{this._id}}>Edit</button>
 		<button type='button' class='delete_button' value={{this._id}}>Delete</button>

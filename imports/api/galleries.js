@@ -1,66 +1,48 @@
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
-import { check } from 'meteor/check';
+import { Match } from 'meteor/check';
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import { ValidatedMethod } from 'meteor/mdg:validated-method';
 
 export const Galleries = new Mongo.Collection('galleries');
 
+//all ValidatedMethod code learned from https://github.com/meteor/validated-method
+export const insertGallery = new ValidatedMethod({
+  name: 'galleries.insert',
+  validate: new SimpleSchema({
+    name: {type: String},
+    description: {type: Match.OneOf(String, null)},
+    regImages: {type: [String]},
+    featured: {type: [String]},
+    open: {type: Boolean},
+		createdAt: {type: Date},
+		owner: {type: String},
+		username: {type: String}
+  }).validator(),
+  run(newGallery) {
+    if (!Meteor.userId) {
+      throw new Meteor.Error('unauthorized', 'You must be logged in');
+    }
+    Galleries.insert(newGallery);
+  }
+});
+
+export const removeGallery = new ValidatedMethod({
+  name: 'galleries.remove',
+  validate: new SimpleSchema({
+    _id: {type: String},
+  }).validator(),
+  run(gallery) {
+    if (!Meteor.userId) {
+      throw new Meteor.Error('unauthorized', 'You must be logged in');
+    }
+    Galleries.remove(gallery);
+  }
+});
 
 if (Meteor.isServer) {
-  // This code only runs on the server
-  // Only publish tasks that are public or belong to the current user
   Meteor.publish('galleries', function galleriesPublication() {
     return Galleries.find();
-		//return Tasks.find({
-    //  $or: [
-    //    { private: { $ne: true } },
-    //    { owner: this.userId },
-    //  ],
-    //});
   });
 	
 }
-
-Meteor.methods({
-  'galleries.insert'(name, regImages, featured) {
-    //check(text, String);
- 
-    // Make sure the user is logged in before inserting a task
-    if (! Meteor.userId()) {
-			alert("You are not logged in. Cannot create gallery");
-      throw new Meteor.Error('not-authorized');
-    }
-		console.log(regImages);
-		console.log(featured);
-    Galleries.insert({
-			name,
-      regImages,
-			featured,
-      createdAt: new Date(),
-      owner: Meteor.userId(),
-      username: Meteor.user().username,
-    });
-  },
-//  'galleries.remove'(taskId) {
-//    check(taskId, String);
-// 
-//	const task = Tasks.findOne(taskId);
-//    if (task.private && task.owner !== Meteor.userId()) {
-//      // If the task is private, make sure only the owner can delete it
-//      throw new Meteor.Error('not-authorized');
-//    } 
-// 
-//    Tasks.remove(taskId);
-//  },
-//  'tasks.setChecked'(taskId, setChecked) {
-//    check(taskId, String);
-//    check(setChecked, Boolean);
-//	
-//	const task = Tasks.findOne(taskId);
-//    if (task.private && task.owner !== Meteor.userId()) {
-//      // If the task is private, make sure only the owner can delete it
-//      throw new Meteor.Error('not-authorized');
-//    }
-// 
-//    Tasks.update(taskId, { $set: { checked: setChecked } });
-//  },
-});

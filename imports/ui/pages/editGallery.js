@@ -3,6 +3,7 @@ import { Template } from 'meteor/templating';
 import {ReactiveDict} from 'meteor/reactive-dict';
 import {Router} from 'meteor/iron:router';
 import { Galleries } from '../../api/galleries.js';
+import { removeGallery } from '../../api/galleries.js';
 import { Uploads } from '../../api/uploads.js';
 
 import './editGallery.html';
@@ -110,6 +111,19 @@ Template.editGallery.events({
         }
       });
     }
+  },
+  'click #delete'(event) {
+    event.preventDefault();
+    console.log(event);
+    removeGallery.call({
+      _id: event.target.value
+    }, function(err) {
+      if(err) {
+        alert(err.reason);
+      }
+    });
+    alert("The gallery has been deleted.");
+    Router.go('/portfolio');
   },
   'click #goBack'(event) {
     event.preventDefault();
