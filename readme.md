@@ -1,4 +1,7 @@
-Package dependencies and sites referenced for how to use them:
+#Photoblogger
+Built on Meteor.js. A photoblogging site that supports multiple accounts and presenting photos in curated galleries. Galleries can also amalgamate from multiple users.
+
+##Package dependencies and sites referenced for how to use them:
 accounts-password        1.5.0  Password support for accounts
 	https://www.meteor.com/tutorials/blaze/adding-user-accounts
 accounts-ui              1.2.0  Simple templates to add login widgets to an app
@@ -33,14 +36,9 @@ standard-minifier-css    1.3.5  Standard css minifier used with Meteor apps b...
 standard-minifier-js     2.2.3  Standard javascript minifiers used with Meteo...
 tracker                  1.1.3  Dependency tracker to allow reactive callbacks
 
-kill -9 `ps ax | grep node | grep meteor | awk '{print $1}'`
-
-SECURITY
-https://www.quora.com/Is-meteor-js-secure-Since-everything-is-happening-on-the-client-side-isnt-it-possible-for-someone-to-intercept-or-read-the-DB-calls-in-the-console
-XXS
-http://www.east5th.co/blog/2015/09/07/hijacking-meteor-accounts-with-xss/
-	add package browser-policy and run disallowInlineScripts() in the server
-	
-Other guides:
-https://guide.meteor.com/
-http://experimentsinmeteor.com/photo-blog-part-1/
+## Todo
+- for security, use ValidatedMethod for updating databases.
+- remove autopublish
+- generally improve UI
+- fix multiple refresh/duplicates glitch that occurs switching between pages
+- allow viewing the personal pages of other users

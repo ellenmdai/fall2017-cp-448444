@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { BrowserPolicy } from 'meteor/browser-policy';
 import '../imports/api/uploads.js';
 import '../imports/api/galleries.js';
-import '../imports/api/follows.js';
+//import '../imports/api/follows.js';
 import '../imports/api/submitrequests.js';
 import '../imports/api/activities.js';
 
