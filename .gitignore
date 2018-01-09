@@ -2,7 +2,6 @@ node_modules/
 
 .meteor/
 package-lock.json
-packages/
 .komodotools/
 photoblogger.komodoproject
 notesToSelf.md
