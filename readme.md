@@ -1,7 +1,13 @@
-#Photoblogger
-Built on Meteor.js. A photoblogging site that supports multiple accounts and presenting photos in curated galleries. Galleries can also amalgamate from multiple users.
+# Photoblogger
+A photoblogging site that supports multiple accounts and presenting photos in curated galleries. Galleries can also amalgamate from multiple users.
+This was my final creative project for a university course.  The goal was to create a site that had the streamlined photo storage and organization of an app like Google Photos, coupled with the feed format of social media platforms like Instagram and Tumblr.  Furthermore, I intend for it to be tailored specifically for photoblogging, so that the photos take center stage per gallery and the interplay between images and text will provide an intuitively readable and writable experience.
 
-##Package dependencies and sites referenced for how to use them:
+## Framework
+This project was built on [Meteor.js](https://www.meteor.com/). 
+- Also requires [Node.js and npm](https://nodejs.org/en/).
+
+## Package dependencies and sites referenced for how to use them:
+- Note: the following is copied from the command `meteor list`; some are automatically created upon creating the project.  Those that are not can be added with `meteor add package-name`. 
 accounts-password        1.5.0  Password support for accounts
 	https://www.meteor.com/tutorials/blaze/adding-user-accounts
 accounts-ui              1.2.0  Simple templates to add login widgets to an app
@@ -36,9 +42,13 @@ standard-minifier-css    1.3.5  Standard css minifier used with Meteor apps b...
 standard-minifier-js     2.2.3  Standard javascript minifiers used with Meteo...
 tracker                  1.1.3  Dependency tracker to allow reactive callbacks
 
+## Notable Features
+
 ## Todo
 - for security, use ValidatedMethod for updating databases.
+- create an API reference
 - remove autopublish
 - generally improve UI
 - fix multiple refresh/duplicates glitch that occurs switching between pages
 - allow viewing the personal pages of other users
+- allow more options for formatting of each gallery individually
