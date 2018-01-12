@@ -8,7 +8,7 @@ This project was built on [Meteor.js](https://www.meteor.com/).
 
 ## Package dependencies and sites referenced for how to use them:
 Note: the following is copied from the command `meteor list`; some are automatically created upon creating the project.  Those that are not can be added with `meteor add package-name`.  
-Also note: the version of gridfs given by CollectionFS is glitcy and stores images as zero bytes.  A working version can be found at https://github.com/ellenmdai/Meteor-CollectionFS/tree/master/packages/gridfs.  To use, create a /packages folder in your project directory and add the gridfs folder into it, in conjunction with `meteor add cfs:gridfs`.
+Also note: the version of gridfs given by CollectionFS is glitcy and stores images as zero bytes.  A working version can be found at https://github.com/badmark/Meteor-CollectionFS/tree/master/packages/gridfs.  To use, create a /packages folder in your project directory and add the gridfs folder into it, in conjunction with `meteor add cfs:gridfs`.
 
  - accounts-password        1.5.0  Password support for accounts
 	https://www.meteor.com/tutorials/blaze/adding-user-accounts
